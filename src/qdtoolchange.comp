@@ -352,7 +352,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_TOOL_OUT
 
-		case STATE_TOOL_IN: // Move the arm from spindle to carousel.
+		case STATE_TOOL_IN: // Move the arm from carousel to spindle.
 			if(state_changed) {
 				if(completed) {
 					/* Wait for completed to go FALSE */
