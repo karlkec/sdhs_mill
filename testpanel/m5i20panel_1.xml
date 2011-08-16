@@ -1,0 +1,405 @@
+<?xml version="1.0"?>
+<pyvcp>
+	<hbox>
+	  <labelframe text="IO on connector 3">
+          <bd>6</bd>
+	<vbox>
+	  <hbox>	
+	    <label><text>"In-12:"</text></label>
+	    <led><halpin>"in12"</halpin></led>
+	    <label><text>"  In-00:"</text></label>
+	    <led><halpin>"in00"</halpin></led>
+          </hbox>
+	  <hbox>
+	    <label><text>"In-13:"</text></label>
+	    <led><halpin>"in13"</halpin></led>
+	    <label><text>"  In-01:"</text></label>
+	    <led><halpin>"in01"</halpin></led>
+          </hbox>
+	  <hbox>
+	    <label><text>"In-14:"</text></label>
+	    <led><halpin>"in14"</halpin></led>
+	    <label><text>"  In-02:"</text></label>
+	    <led><halpin>"in02"</halpin></led>
+          </hbox>
+	  <hbox>
+	    <label><text>"In-15:"</text></label>
+	    <led><halpin>"in15"</halpin></led>
+	    <label><text>"  In-03:"</text></label>
+	    <led><halpin>"in03"</halpin></led>
+          </hbox>
+	  <hbox>
+            <button><halpin>"out24"</halpin><text>"Out-24"</text></button>&#x2212;
+	    <label><text>"In-04:"</text></label>
+	    <led><halpin>"in04"</halpin></led>
+          </hbox>
+	  <hbox>
+            <button><halpin>"out25"</halpin><text>"Out-25"</text></button>
+	    <label><text>"In-05:"</text></label>
+	    <led><halpin>"in05"</halpin></led>
+          </hbox>
+	  <hbox>
+            <button><halpin>"out28"</halpin><text>"Out-28"</text></button>
+	    <label><text>"In-06:"</text></label>
+	    <led><halpin>"in06"</halpin></led>
+          </hbox>
+	  <hbox>
+            <button><halpin>"out36"</halpin><text>"Out-36"</text></button>
+	    <label><text>"In-07:"</text></label>
+	    <led><halpin>"in07"</halpin></led>
+          </hbox>
+
+	<hbox>
+&#x2212;	<button><halpin>"out37"</halpin><text>"Out-37"</text></button>
+	<label><text>"In-08:"</text></label>
+&#x2212;
+	<led><halpin>"in08"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out38"</halpin><text>"Out-38"</text></button>
+	<label><text>"In-09:"</text></label>
+&#x2212;
+	<led><halpin>"in09"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out39"</halpin><text>"Out-39"</text></button>
+	<label><text>"In-10:"</text></label>
+&#x2212;
+	<led><halpin>"in10"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>&#x2212;
+	<button><halpin>"out40"</halpin><text>"Out-40"</text></button>
+	<label><text>"In-11:"</text></label>
+&#x2212;
+	<led><halpin>"in11"</halpin></led>
+</hbox>
+&#x2212;
+</vbox>
+</labelframe>
+&#x2212;
+
+	<labelframe text="IO on connector 4">
+&#x2212;       <bd>6</bd>
+	<vbox>
+&#x2212;
+	<hbox>
+&#x2212;	
+&#x2212;
+	<label><text>"In-28:"</text></label>
+&#x2212;
+	<led><halpin>"in28"</halpin></led>
+
+	<label><text>"  In-16:"</text></label>
+&#x2212;
+	<led><halpin>"in16"</halpin></led>
+
+</hbox>
+	<hbox>
+&#x2212;
+	<label><text>"In-29:"</text></label>
+&#x2212;
+	<led><halpin>"in29"</halpin></led>
+	<label><text>"  In-17:"</text></label>
+&#x2212;
+	<led><halpin>"in17"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"In-30:"</text></label>
+&#x2212;
+	<led><halpin>"in30"</halpin></led>
+	<label><text>"  In-18:"</text></label>
+&#x2212;
+	<led><halpin>"in18"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"In-31:"</text></label>
+&#x2212;
+	<led><halpin>"in31"</halpin></led>
+	<label><text>"  In-19:"</text></label>
+&#x2212;
+	<led><halpin>"in19"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out41"</halpin><text>"Out-41"</text></button>&#x2212;
+	<label><text>"In-20:"</text></label>
+&#x2212;
+	<led><halpin>"in20"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox><button><halpin>"out53"</halpin><text>"Out-53"</text></button>&#x2212;
+	<label><text>"In-21:"</text></label>
+&#x2212;
+	<led><halpin>"in21"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox><button><halpin>"out54"</halpin><text>"Out-54"</text></button>&#x2212;
+	<label><text>"In-22:"</text></label>
+&#x2212;
+	<led><halpin>"in22"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out55"</halpin><text>"Out-55"</text></button>
+	<label><text>"In-23:"</text></label>
+&#x2212;
+	<led><halpin>"in23"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out56"</halpin><text>"Out-56"</text></button>
+	<label><text>"In-24:"</text></label>
+&#x2212;
+	<led><halpin>"in24"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out57"</halpin><text>"Out-57"</text></button>
+	<label><text>"In-25:"</text></label>
+&#x2212;
+	<led><halpin>"in25"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;	<button><halpin>"out58"</halpin><text>"Out-58"</text></button>
+	<label><text>"In-26:"</text></label>
+&#x2212;
+	<led><halpin>"in26"</halpin></led>
+</hbox>
+&#x2212;
+	<hbox>&#x2212;
+	<button><halpin>"out59"</halpin><text>"Out-59"</text></button>
+	<label><text>"In-27:"</text></label>
+&#x2212;
+	<led><halpin>"in27"</halpin></led>
+</hbox>
+
+
+<hbox>
+	<button><halpin>"out60"</halpin><text>"Out-60"</text></button>
+	<button><halpin>"out61"</halpin><text>"Out-61"</text></button>
+</hbox>
+<hbox>
+	<button><halpin>"out62"</halpin><text>"Out-62"</text></button>
+	<button><halpin>"out63"</halpin><text>"Out-63"</text></button>
+</hbox>
+<hbox>
+	<button><halpin>"out64"</halpin><text>"Out-64"</text></button>
+	<button><halpin>"out65"</halpin><text>"Out-65"</text></button>
+</hbox>
+<hbox>
+	<checkbutton><halpin>"out66"</halpin><text>"Out-66"</text></checkbutton>
+	<button><halpin>"out67"</halpin><text>"Out-67"</text></button>
+</hbox>
+<hbox>
+	<checkbutton><halpin>"out68"</halpin><text>"Out-68"</text></checkbutton>
+	<button><halpin>"out69"</halpin><text>"Out-69"</text></button>
+</hbox>
+<hbox>
+	<checkbutton><halpin>"out70"</halpin><text>"Out-70"</text></checkbutton>
+	<button><halpin>"out71"</halpin><text>"Out-71"</text></button>
+</hbox>
+
+
+&#x2212;
+</vbox>
+</labelframe>
+
+
+
+	<labelframe text="Encoders">
+&#x2212;       <bd>6</bd>
+	<vbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 0:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc0"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 1:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc1"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 2:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc2"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 3:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc3"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 4:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc4"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 5:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc5"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 6:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc6"</halpin></number>
+</hbox>
+&#x2212;
+	<hbox>
+&#x2212;
+	<label><text>"ENC 7:"</text></label>
+&#x2212;
+	<number><width>8</width><halpin>"enc7"</halpin></number>
+</hbox>
+</vbox>
+</labelframe>
+    <labelframe text="DACs 1"><bd>6</bd>
+      <vbox>
+	<labelframe text="DAC 0">
+	<vbox>
+	  <hbox>
+	    <label><text>"Enable:"</text></label>
+	    <checkbutton><halpin>"dac0-ena"</halpin></checkbutton>
+          </hbox>
+	    <scale>
+              <halpin>"dac0"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_>
+              <max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 1">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac1-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac1"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 2">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac2-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac2"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 3">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac3-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac3"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+      </vbox>
+    </labelframe>
+ 
+
+    <labelframe text="DACs 2"><bd>6</bd>
+      <vbox>
+	<labelframe text="DAC 4">
+	<vbox>
+	  <hbox>
+	    <label><text>"Enable:"</text></label>
+	    <checkbutton><halpin>"dac4-ena"</halpin></checkbutton>
+          </hbox>
+	    <scale>
+              <halpin>"dac4"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_>
+              <max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 5">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac5-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac5"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 6">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac6-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac6"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+	<labelframe text="DAC 7">
+	  <vbox>
+	    <hbox>
+	      <label><text>"Enable:"</text></label>
+	      <checkbutton><halpin>"dac7-ena"</halpin></checkbutton>
+            </hbox>
+	    <scale>
+              <halpin>"dac7"</halpin>
+              <resolution>0.1</resolution>
+              <orient>HORIZONTAL</orient>
+              <min_>-10</min_><max_>10</max_>
+            </scale>
+          </vbox>
+        </labelframe>
+      </vbox>
+    </labelframe>
+
+
+ </hbox>
+</pyvcp>

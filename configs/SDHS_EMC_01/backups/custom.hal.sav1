@@ -1,0 +1,13 @@
+# Include your customized HAL commands here
+# This file will not be overwritten when you run PNCconf again
+#
+# Scaling for the spindle drive
+#loadrt scale count=1
+#addf scale.0 servo-thread
+
+# The VFD produces 65% of 60Hz at 5.0V input, or 130% at 10.0V input. The motor is nominally
+#  1800 RPM at 60Hz, so the scale factor to convert motor RPM to voltage is 
+#  10V / (1800 * 1.3) = 0.00427.
+#setp scale.0.gain 0.00427
+#net spindle-speed-scale motion.spindle-speed-out => scale.0.in
+#net spindle-speed-DAC scale.0.out => 

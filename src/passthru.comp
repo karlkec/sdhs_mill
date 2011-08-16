@@ -1,0 +1,12 @@
+component passthru "Joins OUT to I/O pins";
+pin in float in;
+pin io float out;
+function _;
+license "GPL";
+;;
+
+
+
+FUNCTION(_) {
+	out = in;
+}

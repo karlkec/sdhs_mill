@@ -1,0 +1,179 @@
+#!/usr/bin/python
+""" M100 is a program to prompt the user to change the gear settings.
+	Copyright (C) 2011 Karl Cunningham
+
+	This program is free software; you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the Free
+	Software Foundation; either version 3 of the License, or any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, see <http://www.gnu.org/licenses/>.
+"""
+
+""" Prompts the user to change the belt and gear settings.
+
+	One command-line argument is required, which describes the belt and gear to be propted for.
+	The command-line argument must be a number, 1-10. corresponding to the lowest gear to the 
+	highest gear (and belt setting). Settings 1-5 are in LOW range, and 6-10 are HIGH range.
+
+	Two buttons are given at the bottom of the prompt: CONTINUE and ABORT.
+	
+	This program returns 0 if the operator clicks CONTINUE, or EXIT_ERROR if the command-line 
+	argument is invalid, the operator clicks ABORT, closes the window, or presses ESC.
+"""
+
+from Tkinter import *
+import sys
+
+# Path to image files
+IMGPATH = "images/"
+
+# Limits for belt and gear arguments
+MINGEAR = 1
+MAXGEAR = 10
+
+EXIT_OK = 0
+EXIT_ERROR = 255
+
+retval = EXIT_OK
+
+class gear_notification:
+    """ Displays the message to the user
+    """
+    def __init__(self,master,ratio,title=None):
+        self.master = master
+
+        if(title):
+            self.master.title(title)
+
+        # Handle clicking the X in the corner
+        self.master.protocol("WM_DELETE_WINDOW", self.abort)
+
+		# Decode the ratio into belt and gear values. These have become less straightforward
+        #  so we play some arithmetic games here
+        self.belt = 4 - ((ratio - 1) % 5)
+        self.gear = (ratio - 1) // 5
+
+        if(self.belt == 0):
+            # Highest Speed of the belt positions
+            self.beltimg = "belt1.gif"
+            self.belttxt = "Change the Belt to the TOP Position"
+        elif(self.belt == 1):
+            self.beltimg = "belt2.gif"
+            self.belttxt = "Change the Belt to the SECOND Position"
+        elif(self.belt == 2):
+            self.beltimg = "belt3.gif"
+            self.belttxt = "Change the Belt to the MIDDLE Position"
+        elif(self.belt == 3):
+            self.beltimg = "belt4.gif"
+            self.belttxt = "Change the Belt to the FOURTH Position"
+        else: # self.belt == 4
+            # Lowest Speed of the belt positions
+            self.beltimg = "belt5.gif"
+            self.belttxt = "Change the Belt to the BOTTOM Position"
+
+        self.beltimg = IMGPATH + self.beltimg
+
+        if(self.gear == 0):
+            self.gearimg = "gearL.gif"
+            self.geartxt = "Set the Gear Lever to LOW"
+        else:
+            self.gearimg = "gearH.gif"
+            self.geartxt = "Set the Gear Lever to HIGH"
+
+        # Prepend the image path and set up the dialog
+        self.gearimg = IMGPATH + self.gearimg
+        self.inittext = "When the Spindle is Stopped\n"
+        self.dialog = self.inittext+self.belttxt+"\n"+"and "+self.geartxt+"\n"
+
+        self.frame1 = Frame(master)
+        self.frame1.pack()
+
+        self.beltpic = PhotoImage(file=self.beltimg)
+        self.picture1 = Label(self.frame1, image=self.beltpic)
+        self.picture1.pack()
+
+        self.gearpic = PhotoImage(file=self.gearimg)
+        self.picture2 = Label(self.frame1, image=self.gearpic)
+        self.picture2.pack()
+
+        self.msg1 = Label(self.frame1,text=self.dialog,fg="red")
+        self.msg1.pack()
+
+        self.finaltext = "Press CONTINUE when Done or ABORT to Stop"
+        self.msg2 = Label(self.frame1,text=self.finaltext)
+        self.msg2.pack()
+
+        self.frame2 = Frame(self.frame1)
+        self.frame2.pack(pady=10)
+
+        self.abort_button = Button(self.frame2,text="ABORT",command=self.abort)
+        self.abort_button.pack(side=LEFT)
+        self.abort_button.bind("<Return>",self.abort)
+        self.abort_button.bind("<Escape>",self.abort)
+
+        self.cont_button = Button(self.frame2,text="CONTINUE",command=self.ok)
+        self.cont_button.pack(side=LEFT)
+        self.cont_button.bind("<Return>",self.ok)
+        self.cont_button.bind("<Escape>",self.abort)
+
+    def abort(self,t=0):
+        global retval
+        retval = EXIT_ERROR
+        self.frame1.quit()
+
+    def ok(self,t=0):
+        global retval
+        retval = EXIT_OK
+        self.frame1.quit()
+
+    def center(self):
+        """ Centers the window """
+        w = 300
+        h = 330
+        sw = self.master.winfo_screenwidth()
+        sh = self.master.winfo_screenheight()
+        self.master.geometry("%dx%d+%d+%d" % (w,h,(sw-w)/2,(sh-h)/2))
+
+    def focus(self):
+        # Sets focus
+        pass
+
+
+################################ MAIN PROGRAM ##########################
+def main():
+    # First Command-line Argument is the gear ratio desired, 1-10
+    if(len(sys.argv) < 2):
+        print "Not enough command-line arguments passed to",sys.argv[0]
+        print "First argument must be the gear ratio desired (1 through 10)"
+        sys.exit(EXIT_ERROR)
+
+    try:
+		# Convert the ratio to an integer. This will filter out lots of possible bogus stuff
+        ratint = int(sys.argv[1])
+    except:
+        print "Invalid Gear Ratio argument passed to",sys.argv[0],"Must be between",MINGEAR,"and",MAXGEAR
+        sys.exit(EXIT_ERROR)
+
+    if((ratint < MINGEAR) or (ratint > MAXGEAR)):
+        print "Invalid Belt Position argument passed to",sys.argv[0],"Must be between",MINGEAR,"and",MAXGEAR
+        sys.exit(EXIT_ERROR)
+
+    # Put up the message
+    root = Tk()
+    dlg = gear_notification(root,ratint,"Gear Change")
+    dlg.center()
+    dlg.focus()
+    root.mainloop()
+
+    #print "retval = ",retval
+    return retval
+
+if __name__ == '__main__':
+    mainret = main()
+    sys.exit(mainret)
+    

@@ -1,0 +1,2 @@
+#!/bin/bash
+halrun -I -k -i configs/SDHS_EMC01_V2_20110312/SDHS_EMC01_V2_20110312.ini -f configs/SDHS_EMC01_V2_20110312/SDHS_EMC01_V2_20110312.hal

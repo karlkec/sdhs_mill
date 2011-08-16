@@ -1,0 +1,382 @@
+# components
+loadrt pid num_chan=7 
+loadrt classicladder_rt numPhysInputs=15 numPhysOutputs=15 numS32in=10 numS32out=10 numFloatIn=10 numFloatOut=10 
+loadrt near 
+loadrt mult2 names=mult2.0 
+loadrt scale names=scale.spindle,scale.0,scale.1,scale.2,scale.3 
+loadrt abs names=abs.0,abs.1,abs.2,abs.3 
+loadrt hm2_pci config="firmware=hm2/5i20/SVST8_4IM2.BIT num_encoders=4 num_pwmgens=4 num_stepgens=0" 
+loadrt hostmot2 
+loadrt probe_parport 
+loadrt motmod servo_period_nsec=1000000 num_joints=3 
+loadrt trivkins 
+# pin aliases
+alias pin pid.4.Dgain pid.x.Dgain
+alias pin pid.4.FF0 pid.x.FF0
+alias pin pid.4.FF1 pid.x.FF1
+alias pin pid.4.FF2 pid.x.FF2
+alias pin pid.4.Igain pid.x.Igain
+alias pin pid.4.Pgain pid.x.Pgain
+alias pin pid.4.bias pid.x.bias
+alias pin pid.4.command pid.x.command
+alias pin pid.4.deadband pid.x.deadband
+alias pin pid.4.enable pid.x.enable
+alias pin pid.4.error pid.x.error
+alias pin pid.4.feedback pid.x.feedback
+alias pin pid.4.index-enable pid.x.index-enable
+alias pin pid.4.maxoutput pid.x.maxoutput
+alias pin pid.4.output pid.x.output
+alias pin pid.5.Dgain pid.y.Dgain
+alias pin pid.5.FF0 pid.y.FF0
+alias pin pid.5.FF1 pid.y.FF1
+alias pin pid.5.FF2 pid.y.FF2
+alias pin pid.5.Igain pid.y.Igain
+alias pin pid.5.Pgain pid.y.Pgain
+alias pin pid.5.bias pid.y.bias
+alias pin pid.5.command pid.y.command
+alias pin pid.5.deadband pid.y.deadband
+alias pin pid.5.enable pid.y.enable
+alias pin pid.5.error pid.y.error
+alias pin pid.5.feedback pid.y.feedback
+alias pin pid.5.index-enable pid.y.index-enable
+alias pin pid.5.maxoutput pid.y.maxoutput
+alias pin pid.5.output pid.y.output
+alias pin pid.6.Dgain pid.z.Dgain
+alias pin pid.6.FF0 pid.z.FF0
+alias pin pid.6.FF1 pid.z.FF1
+alias pin pid.6.FF2 pid.z.FF2
+alias pin pid.6.Igain pid.z.Igain
+alias pin pid.6.Pgain pid.z.Pgain
+alias pin pid.6.bias pid.z.bias
+alias pin pid.6.command pid.z.command
+alias pin pid.6.deadband pid.z.deadband
+alias pin pid.6.enable pid.z.enable
+alias pin pid.6.error pid.z.error
+alias pin pid.6.feedback pid.z.feedback
+alias pin pid.6.index-enable pid.z.index-enable
+alias pin pid.6.maxoutput pid.z.maxoutput
+alias pin pid.6.output pid.z.output
+# param aliases
+# signals
+# nets
+net MDI-Z-up pyvcp.MDI-z_up => halui.mdi-command-00
+net MDI-clear-offset pyvcp.MDI-clear-offset => halui.mdi-command-05
+net MDI-reference-pos pyvcp.MDI-reference => halui.mdi-command-01
+net MDI-zero_X pyvcp.MDI-zerox => halui.mdi-command-02
+net MDI-zero_Y pyvcp.MDI-zeroy => halui.mdi-command-03
+net MDI-zero_Z pyvcp.MDI-zeroz => halui.mdi-command-04
+net coolant-flood iocontrol.0.coolant-flood => hm2_5i20.0.gpio.067.out
+net coolant-mist iocontrol.0.coolant-mist => hm2_5i20.0.gpio.065.out
+net dout-00 motion.digital-out-00
+net dout-01 motion.digital-out-01
+net dout-02 motion.digital-out-02
+net dout-03 motion.digital-out-03
+net estop-ext hm2_5i20.0.gpio.053.in => classicladder.0.in-01
+net estop-out iocontrol.0.user-enable-out => classicladder.0.in-00
+net estop-outcl classicladder.0.out-00 => iocontrol.0.emc-enable-in
+net estop-strobe iocontrol.0.user-request-enable => classicladder.0.in-02
+net jog-speed pyvcp.jog-speed
+net jog-x-neg pyvcp.jog-x-
+net jog-x-pos pyvcp.jog-x+
+net jog-y-neg pyvcp.jog-y-
+net jog-y-pos pyvcp.jog-y+
+net jog-z-neg pyvcp.jog-z-
+net jog-z-pos pyvcp.jog-z+
+net optional-stp-is-on halui.program.optional-stop.is-on => pyvcp.ostop-is-on
+net optional-stp-off pyvcp.ostop-off => halui.program.optional-stop.off
+net optional-stp-on pyvcp.ostop-on => halui.program.optional-stop.on
+net probe-in motion.probe-input
+net program-pause pyvcp.pause => halui.program.pause
+net program-resume pyvcp.resume => halui.program.resume
+net program-single-step pyvcp.step => halui.program.step
+net reset-vfd pyvcp.vfd-reset => hm2_5i20.0.gpio.064.out
+net spindle-at-speed near.0.out
+net spindle-ccw motion.spindle-reverse => hm2_5i20.0.gpio.066.out
+net spindle-cw motion.spindle-forward => hm2_5i20.0.gpio.068.out
+net spindle-enable motion.spindle-on => hm2_5i20.0.gpio.070.out hm2_5i20.0.pwmgen.03.enable
+net spindle-index-enable hm2_5i20.0.encoder.03.index-enable <=> motion.spindle-index-enable
+net spindle-revs motion.spindle-revs pyvcp.motor-rpm
+net spindle-vel-cmd motion.spindle-speed-out => abs.3.in pyvcp.commanded-rpm
+net spindle-vel-cmd-rps motion.spindle-speed-out-rps => near.0.in1
+net spindle-vel-fb motion.spindle-speed-in near.0.in2
+net spindle-vel-inv abs.3.out => mult2.0.in0
+net spindle-vel-output mult2.0.out => hm2_5i20.0.pwmgen.03.value
+net tool-change-confirmed hal_manualtoolchange.changed => iocontrol.0.tool-changed
+net tool-change-request iocontrol.0.tool-change => hal_manualtoolchange.change
+net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
+net vfd-fault hm2_5i20.0.gpio.052.in => pyvcp.vfd-fault
+net vfd-ok hm2_5i20.0.gpio.052.in_not => motion.enable
+net x-index-enable axis.0.index-enable <=> hm2_5i20.0.encoder.00.index-enable => pid.x.index-enable
+net xenable axis.0.amp-enable-out => hm2_5i20.0.pwmgen.00.enable pid.x.enable
+net xneglimit hm2_5i20.0.gpio.057.in => axis.0.home-sw-in axis.0.neg-lim-sw-in
+net xoutput pid.x.output => hm2_5i20.0.pwmgen.00.value
+net xpos-cmd axis.0.motor-pos-cmd => pid.x.command
+net xpos-fb hm2_5i20.0.encoder.00.position => axis.0.motor-pos-fb pid.x.feedback
+net xposlimit hm2_5i20.0.gpio.056.in => axis.0.pos-lim-sw-in
+net y-index-enable axis.1.index-enable <=> hm2_5i20.0.encoder.01.index-enable => pid.y.index-enable
+net yenable axis.1.amp-enable-out => hm2_5i20.0.pwmgen.01.enable pid.y.enable
+net yneglimit hm2_5i20.0.gpio.059.in => axis.1.home-sw-in axis.1.neg-lim-sw-in
+net youtput pid.y.output => hm2_5i20.0.pwmgen.01.value
+net ypos-cmd axis.1.motor-pos-cmd => pid.y.command
+net ypos-fb hm2_5i20.0.encoder.01.position => axis.1.motor-pos-fb pid.y.feedback
+net yposlimit hm2_5i20.0.gpio.058.in => axis.1.pos-lim-sw-in
+net z-index-enable axis.2.index-enable <=> hm2_5i20.0.encoder.02.index-enable => pid.z.index-enable
+net zenable axis.2.amp-enable-out => hm2_5i20.0.pwmgen.02.enable pid.z.enable
+net zhome-sw hm2_5i20.0.gpio.062.in => axis.2.home-sw-in
+net zneglimit hm2_5i20.0.gpio.061.in => axis.2.neg-lim-sw-in
+net zoutput pid.z.output => hm2_5i20.0.pwmgen.02.value
+net zpos-cmd axis.2.motor-pos-cmd => pid.z.command
+net zpos-fb hm2_5i20.0.encoder.02.position => axis.2.motor-pos-fb pid.z.feedback
+net zposlimit hm2_5i20.0.gpio.060.in => axis.2.pos-lim-sw-in
+# parameter values
+setp abs.0.tmax         2590
+setp abs.1.tmax         1380
+setp abs.2.tmax         4010
+setp abs.3.tmax          860
+setp classicladder.0.refresh.tmax        64870
+setp hm2_5i20.0.encoder.00.counter-mode        FALSE
+setp hm2_5i20.0.encoder.00.filter         TRUE
+setp hm2_5i20.0.encoder.00.index-invert        FALSE
+setp hm2_5i20.0.encoder.00.index-mask        FALSE
+setp hm2_5i20.0.encoder.00.index-mask-invert        FALSE
+setp hm2_5i20.0.encoder.00.scale    -41615.36
+setp hm2_5i20.0.encoder.00.vel-timeout          0.5
+setp hm2_5i20.0.encoder.01.counter-mode        FALSE
+setp hm2_5i20.0.encoder.01.filter         TRUE
+setp hm2_5i20.0.encoder.01.index-invert        FALSE
+setp hm2_5i20.0.encoder.01.index-mask        FALSE
+setp hm2_5i20.0.encoder.01.index-mask-invert        FALSE
+setp hm2_5i20.0.encoder.01.scale    -41615.36
+setp hm2_5i20.0.encoder.01.vel-timeout          0.5
+setp hm2_5i20.0.encoder.02.counter-mode        FALSE
+setp hm2_5i20.0.encoder.02.filter         TRUE
+setp hm2_5i20.0.encoder.02.index-invert        FALSE
+setp hm2_5i20.0.encoder.02.index-mask        FALSE
+setp hm2_5i20.0.encoder.02.index-mask-invert        FALSE
+setp hm2_5i20.0.encoder.02.scale     41615.36
+setp hm2_5i20.0.encoder.02.vel-timeout          0.5
+setp hm2_5i20.0.encoder.03.counter-mode         TRUE
+setp hm2_5i20.0.encoder.03.filter        FALSE
+setp hm2_5i20.0.encoder.03.index-invert        FALSE
+setp hm2_5i20.0.encoder.03.index-mask        FALSE
+setp hm2_5i20.0.encoder.03.index-mask-invert        FALSE
+setp hm2_5i20.0.encoder.03.scale    -1.666667
+setp hm2_5i20.0.encoder.03.vel-timeout          0.5
+setp hm2_5i20.0.gpio.006.invert_output        FALSE
+setp hm2_5i20.0.gpio.006.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.007.invert_output        FALSE
+setp hm2_5i20.0.gpio.007.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.008.invert_output        FALSE
+setp hm2_5i20.0.gpio.008.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.009.invert_output        FALSE
+setp hm2_5i20.0.gpio.009.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.010.invert_output        FALSE
+setp hm2_5i20.0.gpio.010.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.011.invert_output        FALSE
+setp hm2_5i20.0.gpio.011.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.018.invert_output        FALSE
+setp hm2_5i20.0.gpio.018.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.019.invert_output        FALSE
+setp hm2_5i20.0.gpio.019.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.020.invert_output        FALSE
+setp hm2_5i20.0.gpio.020.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.021.invert_output        FALSE
+setp hm2_5i20.0.gpio.021.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.022.invert_output        FALSE
+setp hm2_5i20.0.gpio.022.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.023.invert_output        FALSE
+setp hm2_5i20.0.gpio.023.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.024.invert_output        FALSE
+setp hm2_5i20.0.gpio.024.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.024.is_output        FALSE
+setp hm2_5i20.0.gpio.025.invert_output        FALSE
+setp hm2_5i20.0.gpio.025.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.025.is_output        FALSE
+setp hm2_5i20.0.gpio.026.invert_output        FALSE
+setp hm2_5i20.0.gpio.026.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.026.is_output        FALSE
+setp hm2_5i20.0.gpio.027.invert_output        FALSE
+setp hm2_5i20.0.gpio.027.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.027.is_output        FALSE
+setp hm2_5i20.0.gpio.028.invert_output        FALSE
+setp hm2_5i20.0.gpio.028.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.028.is_output        FALSE
+setp hm2_5i20.0.gpio.029.invert_output        FALSE
+setp hm2_5i20.0.gpio.029.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.029.is_output        FALSE
+setp hm2_5i20.0.gpio.030.invert_output        FALSE
+setp hm2_5i20.0.gpio.030.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.030.is_output        FALSE
+setp hm2_5i20.0.gpio.031.invert_output        FALSE
+setp hm2_5i20.0.gpio.031.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.031.is_output        FALSE
+setp hm2_5i20.0.gpio.032.invert_output        FALSE
+setp hm2_5i20.0.gpio.032.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.032.is_output        FALSE
+setp hm2_5i20.0.gpio.033.invert_output        FALSE
+setp hm2_5i20.0.gpio.033.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.033.is_output        FALSE
+setp hm2_5i20.0.gpio.034.invert_output        FALSE
+setp hm2_5i20.0.gpio.034.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.034.is_output        FALSE
+setp hm2_5i20.0.gpio.035.invert_output        FALSE
+setp hm2_5i20.0.gpio.035.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.035.is_output        FALSE
+setp hm2_5i20.0.gpio.036.invert_output        FALSE
+setp hm2_5i20.0.gpio.036.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.036.is_output        FALSE
+setp hm2_5i20.0.gpio.037.invert_output        FALSE
+setp hm2_5i20.0.gpio.037.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.037.is_output        FALSE
+setp hm2_5i20.0.gpio.038.invert_output        FALSE
+setp hm2_5i20.0.gpio.038.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.038.is_output        FALSE
+setp hm2_5i20.0.gpio.039.invert_output        FALSE
+setp hm2_5i20.0.gpio.039.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.039.is_output        FALSE
+setp hm2_5i20.0.gpio.040.invert_output        FALSE
+setp hm2_5i20.0.gpio.040.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.040.is_output        FALSE
+setp hm2_5i20.0.gpio.041.invert_output        FALSE
+setp hm2_5i20.0.gpio.041.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.041.is_output        FALSE
+setp hm2_5i20.0.gpio.042.invert_output        FALSE
+setp hm2_5i20.0.gpio.042.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.042.is_output        FALSE
+setp hm2_5i20.0.gpio.043.invert_output        FALSE
+setp hm2_5i20.0.gpio.043.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.043.is_output        FALSE
+setp hm2_5i20.0.gpio.044.invert_output        FALSE
+setp hm2_5i20.0.gpio.044.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.044.is_output        FALSE
+setp hm2_5i20.0.gpio.045.invert_output        FALSE
+setp hm2_5i20.0.gpio.045.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.045.is_output        FALSE
+setp hm2_5i20.0.gpio.046.invert_output        FALSE
+setp hm2_5i20.0.gpio.046.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.046.is_output        FALSE
+setp hm2_5i20.0.gpio.047.invert_output        FALSE
+setp hm2_5i20.0.gpio.047.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.047.is_output        FALSE
+setp hm2_5i20.0.gpio.052.invert_output        FALSE
+setp hm2_5i20.0.gpio.052.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.052.is_output        FALSE
+setp hm2_5i20.0.gpio.053.invert_output        FALSE
+setp hm2_5i20.0.gpio.053.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.053.is_output        FALSE
+setp hm2_5i20.0.gpio.054.invert_output        FALSE
+setp hm2_5i20.0.gpio.054.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.054.is_output        FALSE
+setp hm2_5i20.0.gpio.055.invert_output        FALSE
+setp hm2_5i20.0.gpio.055.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.055.is_output        FALSE
+setp hm2_5i20.0.gpio.056.invert_output        FALSE
+setp hm2_5i20.0.gpio.056.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.056.is_output        FALSE
+setp hm2_5i20.0.gpio.057.invert_output        FALSE
+setp hm2_5i20.0.gpio.057.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.057.is_output        FALSE
+setp hm2_5i20.0.gpio.058.invert_output        FALSE
+setp hm2_5i20.0.gpio.058.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.058.is_output        FALSE
+setp hm2_5i20.0.gpio.059.invert_output        FALSE
+setp hm2_5i20.0.gpio.059.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.059.is_output        FALSE
+setp hm2_5i20.0.gpio.060.invert_output        FALSE
+setp hm2_5i20.0.gpio.060.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.060.is_output        FALSE
+setp hm2_5i20.0.gpio.061.invert_output        FALSE
+setp hm2_5i20.0.gpio.061.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.061.is_output        FALSE
+setp hm2_5i20.0.gpio.062.invert_output        FALSE
+setp hm2_5i20.0.gpio.062.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.062.is_output        FALSE
+setp hm2_5i20.0.gpio.063.invert_output        FALSE
+setp hm2_5i20.0.gpio.063.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.063.is_output        FALSE
+setp hm2_5i20.0.gpio.064.invert_output         TRUE
+setp hm2_5i20.0.gpio.064.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.064.is_output         TRUE
+setp hm2_5i20.0.gpio.065.invert_output        FALSE
+setp hm2_5i20.0.gpio.065.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.065.is_output         TRUE
+setp hm2_5i20.0.gpio.066.invert_output         TRUE
+setp hm2_5i20.0.gpio.066.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.066.is_output         TRUE
+setp hm2_5i20.0.gpio.067.invert_output        FALSE
+setp hm2_5i20.0.gpio.067.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.067.is_output         TRUE
+setp hm2_5i20.0.gpio.068.invert_output         TRUE
+setp hm2_5i20.0.gpio.068.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.068.is_output         TRUE
+setp hm2_5i20.0.gpio.069.invert_output        FALSE
+setp hm2_5i20.0.gpio.069.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.069.is_output        FALSE
+setp hm2_5i20.0.gpio.070.invert_output         TRUE
+setp hm2_5i20.0.gpio.070.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.070.is_output         TRUE
+setp hm2_5i20.0.gpio.071.invert_output        FALSE
+setp hm2_5i20.0.gpio.071.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.071.is_output        FALSE
+setp hm2_5i20.0.io_error        FALSE
+setp hm2_5i20.0.pet_watchdog.tmax         8900
+setp hm2_5i20.0.pwmgen.00.output-type            1
+setp hm2_5i20.0.pwmgen.00.scale           -5
+setp hm2_5i20.0.pwmgen.01.output-type            1
+setp hm2_5i20.0.pwmgen.01.scale           -5
+setp hm2_5i20.0.pwmgen.02.output-type            1
+setp hm2_5i20.0.pwmgen.02.scale           -5
+setp hm2_5i20.0.pwmgen.03.output-type            1
+setp hm2_5i20.0.pwmgen.03.scale         2500
+setp hm2_5i20.0.pwmgen.pdm_frequency   0x000186A0
+setp hm2_5i20.0.pwmgen.pwm_frequency   0x000186A0
+setp hm2_5i20.0.read.tmax        76380
+setp hm2_5i20.0.read_gpio.tmax            0
+setp hm2_5i20.0.watchdog.timeout_ns   0x00989680
+setp hm2_5i20.0.write.tmax        42770
+setp hm2_5i20.0.write_gpio.tmax            0
+setp motion-command-handler.tmax         6530
+setp motion-controller.tmax        54260
+setp motion.servo.overruns   0x00000000
+setp mult2.0.tmax         2550
+setp near.0.difference            0
+setp near.0.scale          0.9
+setp near.0.tmax         5210
+setp pid.0.do-pid-calcs.tmax         7990
+setp pid.1.do-pid-calcs.tmax         8130
+setp pid.2.do-pid-calcs.tmax         4750
+setp pid.3.do-pid-calcs.tmax         4400
+setp pid.4.do-pid-calcs.tmax        10450
+setp pid.5.do-pid-calcs.tmax         5620
+setp pid.6.do-pid-calcs.tmax        13140
+setp scale.0.tmax         1860
+setp scale.1.tmax         1460
+setp scale.2.tmax         1050
+setp scale.3.tmax         1370
+setp scale.spindle.tmax         5920
+# realtime thread/function links
+addf hm2_5i20.0.read servo-thread
+addf motion-command-handler servo-thread
+addf motion-controller servo-thread
+addf pid.0.do-pid-calcs servo-thread
+addf pid.1.do-pid-calcs servo-thread
+addf pid.2.do-pid-calcs servo-thread
+addf pid.3.do-pid-calcs servo-thread
+addf pid.4.do-pid-calcs servo-thread
+addf pid.5.do-pid-calcs servo-thread
+addf pid.6.do-pid-calcs servo-thread
+addf classicladder.0.refresh servo-thread
+addf abs.0 servo-thread
+addf abs.1 servo-thread
+addf abs.2 servo-thread
+addf abs.3 servo-thread
+addf mult2.0 servo-thread
+addf scale.spindle servo-thread
+addf scale.0 servo-thread
+addf scale.1 servo-thread
+addf scale.2 servo-thread
+addf scale.3 servo-thread
+addf near.0 servo-thread
+addf hm2_5i20.0.write servo-thread
+addf hm2_5i20.0.pet_watchdog servo-thread

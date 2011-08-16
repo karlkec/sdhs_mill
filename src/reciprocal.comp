@@ -1,0 +1,12 @@
+component reciprocal "1/float";
+pin in float in;
+pin out float out;
+function _;
+license "GPL";
+;;
+
+FUNCTION(_) {
+	if (in > 0) {
+		out = 1/in;
+	}
+}

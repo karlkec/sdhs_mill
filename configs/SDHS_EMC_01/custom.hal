@@ -1,0 +1,34 @@
+# --- ESTOP-EXT ---
+net estop-ext     <=  hm2_5i20.0.gpio.053.in
+#
+# ---setup X-axis home / limit switch signals---
+#  The X axis doesn't have a home switch separate from the limit switch. 
+#   We'll wire them together.
+# X-axis positive limit switch
+net xposlimit hm2_5i20.0.gpio.056.in => axis.0.pos-lim-sw-in
+# X-axis home and negative limit switch
+net xneglimit hm2_5i20.0.gpio.057.in => axis.0.neg-lim-sw-in axis.0.home-sw-in
+
+# ---setup Y-axis home / limit switch signals---
+# Y-axis postive limit switch
+net yposlimit hm2_5i20.0.gpio.058.in =>  axis.1.pos-lim-sw-in
+# Y-axis negative limit switch and home switch
+net yneglimit hm2_5i20.0.gpio.059.in =>  axis.1.neg-lim-sw-in axis.1.home-sw-in
+
+# ---setup Z-axis home / limit switch signals---
+# Z-axis home switch
+net zhome-sw <= hm2_5i20.0.gpio.062.in =>  axis.2.home-sw-in
+# Z-axis limit switchs
+net zposlimit hm2_5i20.0.gpio.060.in =>  axis.2.pos-lim-sw-in
+net zneglimit hm2_5i20.0.gpio.061.in =>  axis.2.neg-lim-sw-in
+
+net spindle-vel-cmd	=> abs.3.in
+net spindle-vel-inv	<= abs.3.out => mult2.0.in0
+# Use negative output for the PWM output. Dunno why but it works.
+setp mult2.0.in1 -1.0
+net spindle-vel-output  <= mult2.0.out => hm2_5i20.0.pwmgen.03.value
+net spindle-enable      => hm2_5i20.0.pwmgen.03.enable
+
+# VFD Spindle Drive Fault -- There is an led and a button in the pyvcp to 
+#  reset it.
+net vfd-ok motion.enable <= hm2_5i20.0.gpio.052.in_not

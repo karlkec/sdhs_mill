@@ -1,0 +1,257 @@
+#loadusr -Wn iotest pyvcp -c iotest m5i20panel_1.xml
+loadusr -Wn iotest pyvcp -c iotest m5i20panel_2.xml
+
+# create a thread 
+loadrt threads name1=tt period1=100000 name2=tt2 period2=10000000
+
+# load the m5i20 driver
+#loadrt hal_m5i20 loadFpga=1 dacRate=16666
+loadrt hostmot2
+
+# Changed the following 4 lines. K. Cunningham 4/23/11
+loadrt hm2_pci config="firmware=hm2/5i20/SVST8_4IM2.BIT num_encoders=4 num_pwmgens=4 num_stepgens=0"
+    setp hm2_5i20.0.pwmgen.pwm_frequency 100000
+    setp hm2_5i20.0.pwmgen.pdm_frequency 100000
+    setp hm2_5i20.0.watchdog.timeout_ns 10000000
+
+# Absolute balue for the spindle drive
+loadrt abs count=1
+addf abs.0 tt
+loadrt and2 count=2
+addf and2.0 tt
+addf and2.1 tt
+loadrt not count=1
+addf not.0 tt
+
+# For testing
+loadrt minmax count=1
+addf minmax.0 tt
+
+#Start the functions for our firmware
+addf hm2_5i20.0.read tt
+addf hm2_5i20.0.read_gpio tt
+addf hm2_5i20.0.write tt
+addf hm2_5i20.0.write_gpio tt
+addf hm2_5i20.0.pet_watchdog tt
+
+# update digital inputs
+#addf m5i20.0.digital-in-read tt
+
+# update digital outputs
+#addf m5i20.0.digital-out-write tt
+
+# misc update ? required to update onboard LEDs (at least...)
+#addf m5i20.0.misc-update tt
+
+# update encoder counters
+#addf m5i20.0.encoder-read tt
+
+# update DACs and DAC-enable
+#addf m5i20.0.dac-write tt
+
+# IO
+# Link digital inputs to LEDs
+net in00 <= iotest.in00 => hm2_5i20.0.gpio.000.in
+net in01 <= iotest.in01 => hm2_5i20.0.gpio.001.in
+net in02 <= iotest.in02 => hm2_5i20.0.gpio.002.in
+net in03 <= iotest.in03 => hm2_5i20.0.gpio.003.in
+net in04 <= iotest.in04 => hm2_5i20.0.gpio.004.in
+net in05 <= iotest.in05 => hm2_5i20.0.gpio.005.in
+net in06 <= iotest.in06 => hm2_5i20.0.gpio.006.in
+net in07 <= iotest.in07 => hm2_5i20.0.gpio.007.in
+net in08 <= iotest.in08 => hm2_5i20.0.gpio.008.in
+net in09 <= iotest.in09 => hm2_5i20.0.gpio.009.in
+net in10 <= iotest.in10 => hm2_5i20.0.gpio.010.in
+net in11 <= iotest.in11 => hm2_5i20.0.gpio.011.in
+net in12 <= iotest.in12 => hm2_5i20.0.gpio.012.in
+net in13 <= iotest.in13 => hm2_5i20.0.gpio.013.in
+net in14 <= iotest.in14 => hm2_5i20.0.gpio.014.in
+net in15 <= iotest.in15 => hm2_5i20.0.gpio.015.in
+net in16 <= iotest.in16 => hm2_5i20.0.gpio.016.in
+net in17 <= iotest.in17 => hm2_5i20.0.gpio.017.in
+net in18 <= iotest.in18 => hm2_5i20.0.gpio.018.in
+net in19 <= iotest.in19 => hm2_5i20.0.gpio.019.in
+net in20 <= iotest.in20 => hm2_5i20.0.gpio.020.in
+net in21 <= iotest.in21 => hm2_5i20.0.gpio.021.in
+net in22 <= iotest.in22 => hm2_5i20.0.gpio.022.in
+net in23 <= iotest.in23 => hm2_5i20.0.gpio.023.in
+#net in26 <= iotest.in26 => hm2_5i20.0.gpio.026.in
+net in27 <= iotest.in27 => hm2_5i20.0.gpio.027.in
+net in28 <= iotest.in28 => hm2_5i20.0.gpio.028.in
+net in29 <= iotest.in29 => hm2_5i20.0.gpio.029.in
+net in30 <= iotest.in30 => hm2_5i20.0.gpio.030.in
+net in31 <= iotest.in31 => hm2_5i20.0.gpio.031.in
+
+# Limit switches and Z home switch. The Z home switch is also
+#  the toolchanger position, but we'll let emc2 handle that.
+# Each of these is a normally-closed contact, pulling the input
+#  high when closed. The inputs are inverted, so when a
+#  switch is activated the input is high.
+net xposlimit <= iotest.xposlimit => hm2_5i20.0.gpio.056.in
+net xneglimit <= iotest.xneglimit => hm2_5i20.0.gpio.057.in
+net yposlimit <= iotest.yposlimit => hm2_5i20.0.gpio.058.in
+net yneglimit <= iotest.yneglimit => hm2_5i20.0.gpio.059.in
+net zposlimit <= iotest.zposlimit => hm2_5i20.0.gpio.060.in
+net zneglimit <= iotest.zneglimit => hm2_5i20.0.gpio.061.in
+net zhome <= iotest.zhome => hm2_5i20.0.gpio.062.in
+
+# Monitor the output to the VFD:
+net mon66 iotest.in66 hm2_5i20.0.gpio.066.in
+net mon68 iotest.in68 hm2_5i20.0.gpio.068.in
+net mon70 iotest.in70 hm2_5i20.0.gpio.070.in
+
+# link digital outputs to buttons
+net mout-24 <= hm2_5i20.0.gpio.024.out => iotest.out24
+net mout-25 <= hm2_5i20.0.gpio.025.out => iotest.out25
+net mout-28 <= hm2_5i20.0.gpio.028.out => iotest.out28
+net mout-36 <= hm2_5i20.0.gpio.036.out => iotest.out36
+net mout-37 <= hm2_5i20.0.gpio.037.out => iotest.out37
+net mout-38 <= hm2_5i20.0.gpio.038.out => iotest.out38
+net mout-39 <= hm2_5i20.0.gpio.039.out => iotest.out39
+net mout-40 <= hm2_5i20.0.gpio.040.out => iotest.out40
+net mout-41 <= hm2_5i20.0.gpio.041.out => iotest.out41
+net mout-53 <= hm2_5i20.0.gpio.053.out => iotest.out53
+net mout-54 <= hm2_5i20.0.gpio.054.out => iotest.out54
+net mout-55 <= hm2_5i20.0.gpio.055.out => iotest.out55
+net mout-65 <= hm2_5i20.0.gpio.065.out => iotest.out65
+net mout-67 <= hm2_5i20.0.gpio.067.out => iotest.out67
+net mout-69 <= hm2_5i20.0.gpio.069.out => iotest.out69
+net mout-71 <= hm2_5i20.0.gpio.071.out => iotest.out71
+
+# COmment out the following two lines when enabling the code below
+#net mout-66 <= hm2_5i20.0.gpio.066.out => iotest.out66
+#net mout-68 <= hm2_5i20.0.gpio.068.out => iotest.out68
+# Pin 70 is handled below
+#net mout-70 <= hm2_5i20.0.gpio.070.out => iotest.out70
+
+# Set GPIO lines for VFD control lines as output
+
+# ENCODERS
+net enc0_val <= hm2_5i20.0.encoder.00.count => iotest.enc0 
+net enc1_val <= hm2_5i20.0.encoder.01.count => iotest.enc1 
+net enc2_val <= hm2_5i20.0.encoder.02.count => iotest.enc2 
+net enc3_val <= hm2_5i20.0.encoder.03.count => iotest.enc3 
+
+# XYZ Encoders are 41300 counts per inch. All negative
+#  according to convention
+setp hm2_5i20.0.encoder.00.scale -40000
+setp hm2_5i20.0.encoder.01.scale -40000
+setp hm2_5i20.0.encoder.02.scale 40000
+
+# Velocity timeouts occur when there is no encoder activity. 
+#  It's deemed to be zero in this case. Timeouts in seconds
+setp hm2_5i20.0.encoder.00.vel-timeout 0.05
+setp hm2_5i20.0.encoder.01.vel-timeout 0.05
+setp hm2_5i20.0.encoder.02.vel-timeout 0.05
+
+# XYZ Position
+net x_pos <= hm2_5i20.0.encoder.00.position => iotest.xpos
+net y_pos <= hm2_5i20.0.encoder.01.position => iotest.ypos
+net z_pos <= hm2_5i20.0.encoder.02.position => iotest.zpos
+
+# XYZ Velocity
+net x_vel <= hm2_5i20.0.encoder.00.velocity => iotest.xvel
+net y_vel <= hm2_5i20.0.encoder.01.velocity => iotest.yvel
+net z_vel <= hm2_5i20.0.encoder.02.velocity => iotest.zvel
+
+# The spindle motor has 400 counts per revolution. This converts to RPM.
+setp hm2_5i20.0.encoder.03.scale 6.666666
+# This will assure any frequency below 5Hz is zero RPM, and that it isn't hung up
+#  when the VFD gets turned off.
+setp hm2_5i20.0.encoder.03.vel-timeout 0.1
+setp hm2_5i20.0.encoder.03.filter 0
+# Ignore the index input (not used for the spindle)
+setp hm2_5i20.0.encoder.03.index-mask 0
+net spindle_motor_rpm <= hm2_5i20.0.encoder.03.velocity => iotest.smrpm minmax.0.in
+
+
+# DAC enable
+net dac0_en <= iotest.dac0-ena => hm2_5i20.0.pwmgen.00.enable
+net dac1_en <= iotest.dac1-ena => hm2_5i20.0.pwmgen.01.enable
+net dac2_en <= iotest.dac2-ena => hm2_5i20.0.pwmgen.02.enable
+
+# PWM outputs 0, 1, and 2. Output 3 is below under SPINDLE
+net pwm0_val <= iotest.dac0-f => hm2_5i20.0.pwmgen.00.value
+net pwm1_val <= iotest.dac1-f => hm2_5i20.0.pwmgen.01.value
+net pwm2_val <= iotest.dac2-f => hm2_5i20.0.pwmgen.02.value
+
+# PWM Polarity and scaling to +/-1.0
+setp hm2_5i20.0.pwmgen.00.scale -10.0
+setp hm2_5i20.0.pwmgen.01.scale -10.0
+setp hm2_5i20.0.pwmgen.02.scale -10.0
+
+############# SPINDLE DRIVE ##############
+# The spindle VFD needs four outputs. A 0-10V analog signal proportional to speed,
+#  and active-low digital lines for ENABLE, FORWARD, and REVERSE. We have on the test panel
+#  an enable checkbox, and a left-right slider that goes from -10 to +10. We convert these
+#  to the hardware output lines.
+
+# pins 66, 68, ande 70 are all active low open-drain outputs, and so will be inverted
+setp hm2_5i20.0.gpio.065.is_output 1
+setp hm2_5i20.0.gpio.066.is_output 1
+setp hm2_5i20.0.gpio.067.is_output 1
+setp hm2_5i20.0.gpio.068.is_output 1
+setp hm2_5i20.0.gpio.069.is_output 1
+setp hm2_5i20.0.gpio.070.is_output 1
+setp hm2_5i20.0.gpio.071.is_output 1
+setp hm2_5i20.0.gpio.065.is_opendrain 1
+setp hm2_5i20.0.gpio.066.is_opendrain 1
+setp hm2_5i20.0.gpio.067.is_opendrain 1
+setp hm2_5i20.0.gpio.068.is_opendrain 1
+setp hm2_5i20.0.gpio.069.is_opendrain 1
+setp hm2_5i20.0.gpio.070.is_opendrain 1
+setp hm2_5i20.0.gpio.071.is_opendrain 1
+setp hm2_5i20.0.gpio.065.invert_output 1
+setp hm2_5i20.0.gpio.066.invert_output 1
+setp hm2_5i20.0.gpio.067.invert_output 1
+setp hm2_5i20.0.gpio.068.invert_output 1
+setp hm2_5i20.0.gpio.069.invert_output 1
+setp hm2_5i20.0.gpio.070.invert_output 1
+setp hm2_5i20.0.gpio.071.invert_output 1
+
+# Spindle drive uses an absolute value output
+net pwm3_val <= iotest.dac3-f => abs.0.in
+net abs_spindle <= abs.0.out => hm2_5i20.0.pwmgen.03.value
+
+# Spindle enable needs to go to two places temporarily
+net spindle_enable <= iotest.dac3-ena => hm2_5i20.0.pwmgen.03.enable => hm2_5i20.0.gpio.070.out
+net spindle_enable <= and2.0.in0 => and2.1.in0
+net spindle_rot_ccw <= abs.0.sign => and2.0.in1 => not.0.in
+net spindle_rot_cw <= not.0.out => and2.1.in1
+net spindle_ccw_out <= and2.0.out => hm2_5i20.0.gpio.066.out
+net spindle_cw_out <= and2.1.out => hm2_5i20.0.gpio.068.out 
+
+# Spindle slider on the testpanel has a range of -10 to +10. 
+#  This scales it to 0 to 1 for the analog output of the 7i33 board.
+# The output is divided by this scale factor.
+setp hm2_5i20.0.pwmgen.03.scale -10.0
+
+# Reset output to the spindle VFD. This comes from a button on the testpanel,
+#  and goes to OUT0 on the left-hand 7i37 board.
+setp hm2_5i20.0.gpio.064.is_output 1
+setp hm2_5i20.0.gpio.064.is_opendrain 1
+setp hm2_5i20.0.gpio.064.invert_output 1
+net vfd-reset <= iotest.vfd_reset => hm2_5i20.0.gpio.064.out
+
+# Fault input from the spindle VFD to a LED on the testpanel. THis comes in on 
+#  an active low input, and is intended to be pulled high by the 
+#  normally-closed relay contact (between pins FLB and FLC of the VFD),
+#  which opens on fault.
+net vfd-fault <= hm2_5i20.0.gpio.052.in => iotest.vfd_fault
+
+# ESTOP input from the red pushbutton. This input is usually wired to the first input pin
+#  of connector P3 if the 5i20. But since we're not using that board unless we have to, we're
+#  putting it on IN4 of the left-hand 7i37 board, which is gpio input 53 of the 5i20 board. 
+#  This is an active-low input, held high by the normally-closed contact of the pushbutton switch.
+net estop-in <= hm2_5i20.0.gpio.053.in => iotest.ext_estop_in
+
+
+
+#helps for debugging
+loadusr halmeter
+
+# start 
+start
+
+# wait for iotest to close before ending hal session
+waitusr iotest

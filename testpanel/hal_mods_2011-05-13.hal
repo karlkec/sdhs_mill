@@ -1,0 +1,96 @@
+# PWM Polarity 
+setp hm2_5i20.0.pwmgen.00.scale -1.0
+setp hm2_5i20.0.pwmgen.01.scale -1.0
+setp hm2_5i20.0.pwmgen.02.scale -1.0
+
+# ENCODERS
+net enc0_val <= hm2_5i20.0.encoder.00.count => iotest.enc0 
+net enc1_val <= hm2_5i20.0.encoder.01.count => iotest.enc1 
+net enc2_val <= hm2_5i20.0.encoder.02.count => iotest.enc2 
+net enc3_val <= hm2_5i20.0.encoder.03.count => iotest.enc3 
+
+# XYZ Encoders are 41300 counts per inch
+setp hm2_5i20.0.encoder.00.scale -41300
+setp hm2_5i20.0.encoder.01.scale -41300
+setp hm2_5i20.0.encoder.02.scale -41300
+
+# Velocity timeouts occur when there is no encoder activity. 
+#  It's deemed to be zero in this case. Timeouts in seconds
+setp hm2_5i20.0.encoder.00.vel-timeout 0.05
+setp hm2_5i20.0.encoder.01.vel-timeout 0.05
+setp hm2_5i20.0.encoder.02.vel-timeout 0.05
+
+# XYZ Position
+net x_pos <= hm2_5i20.0.encoder.00.position => iotest.xpos
+net y_pos <= hm2_5i20.0.encoder.01.position => iotest.ypos
+net z_pos <= hm2_5i20.0.encoder.02.position => iotest.zpos
+
+# XYZ Velocity
+net x_vel <= hm2_5i20.0.encoder.00.velocity => iotest.xvel
+net y_vel <= hm2_5i20.0.encoder.01.velocity => iotest.yvel
+net z_vel <= hm2_5i20.0.encoder.02.velocity => iotest.zvel
+
+# The spindle motor has 8 counts per revolution. This converts to RPM.
+setp hm2_5i20.0.encoder.03.scale 0.133333333
+# This will assume any frequency below 5Hz is zero RPM.
+setp hm2_5i20.0.encoder.03.vel-timeout 0.2
+# Ignore the index input (not used for the spindle)
+setp hm2_5i20.0.encoder.03.index-mask 0
+net spindle_rpm <= hm2_5i20.0.encoder.03.velocity => iotest.srpm
+
+<hbox>
+&#x2212;
+<label><text>"X Encoder Count:"</text></label>
+&#x2212;
+<number><width>8</width><halpin>"enc0"</halpin></number>
+&#x2212;
+<label><text>"X Position (in):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"xpos"</halpin></number>
+&#x2212;
+<label><text>"X Speed (in/sec):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"xvel"</halpin></number>
+</hbox>
+
+<hbox>
+&#x2212;
+<label><text>"Y Encoder Count:"</text></label>
+&#x2212;
+<number><width>8</width><halpin>"enc1"</halpin></number>
+&#x2212;
+<label><text>"Y Position (in):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"ypos"</halpin></number>
+&#x2212;
+<label><text>"Y Speed (in/sec):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"yvel"</halpin></number>
+</hbox>
+
+<hbox>
+&#x2212;
+<label><text>"Z Encoder Count:"</text></label>
+&#x2212;
+<number><width>8</width><halpin>"enc2"</halpin></number>
+&#x2212;
+<label><text>"Z Position (in):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"zpos"</halpin></number>
+&#x2212;
+<label><text>"Z Speed (in/sec):"</text></label>
+&#x2212;
+<number><width>8</width><format>"+4.4f"</format><halpin>"zvel"</halpin></number>
+</hbox>
+
+
+<hbox>
+&#x2212;
+<label><text>"Spindle Encoder Count:"</text></label>
+&#x2212;
+<number><width>8</width><halpin>"enc3"</halpin></number>
+&#x2212;
+<label><text>"Spindle RPM:"</text></label>
+&#x2212;
+<number><width>8</width><halpin>"srpm"</halpin></number>
+</hbox>

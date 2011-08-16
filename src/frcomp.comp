@@ -1,0 +1,50 @@
+component frcomp "EMC2 HAL function providing friction compensation";
+pin in float in "The input. Usually connected to a pid output";
+pin out float out "The output. Usually fed to a pwm or other drive component";
+param rw float friction_pos "The output required to overcome friction in the positive direction";
+param rw float friction_neg "The output required to overcome friction in the negative direction";
+param rw float gain "The gain when the input is between friction_neg and friction_pos";
+function _;
+description """
+Frcomp provides friction compensation. It is intended to be inserted between the output of a pid controller and the input of a pwm or other drive component
+in a servo system. This component attempts to compensate for lack of joint motion in some servo systems with small
+commanded torque or velocity, by providing higher-than-normal output for small motions.
+
+The \\fBgain\\fR parameter sets the gain in the high-gain region around zero. \\fBfrcomp\\fR establishes a region, 
+symmetrical around zero, for values of \\fBin\\fR where the high gain is used. This is determined by dividing the difference between
+\\fBfriction_neg\\fR and \\fBfriction_pos\\fR by \\fBgain\\fR. Setting a high gain value can affect pid loop stability; 
+a gain of 5 or less often provides adequate friction compensation.
+
+Pid controllers usually do a decent job of compensating for friction, but often this is done by increasing the proportional gain, which
+can result in less-than-optimal stability margins. This function provides a transfer function which has a high-gain portion around zero and normal gain for larger
+inputs. The high gain is used when \\fIin\\fP is such that the output (at a gain of 1) would be between friction_neg and friction_pos, and a gain 
+of one is used otherwise. The output is continuous and monotonic provided friction_pos is greater than friction_neg.
+
+Using a non-zero bias parameter in the pid controller preceding this component may not work as expected because the biased output from the pid 
+controller will be different when passed through the transfer function of this component. Bias may be applied to the output of this
+function by adding it to both friction_pos and friction neg. Usually, though, this may not be necessary if friction_pos and 
+friction_neg are found via physical testing.
+""";
+
+license "GPL";
+author "K. Cunningham";
+;;
+float in_ = in; // Necessary to support multiple named instances
+if(gain == 0.0) {
+    if(in_ > 0.0)
+        out = in_ + friction_pos;
+    else if(in_ < 0.0)
+	out = in_ + friction_neg;
+    else
+	out = 0;
+} else { // gain != 0.0
+    // motion_tol is the positive or negative limit of the region around zero to use high gain
+    float motion_tol = (friction_pos - friction_neg) / gain / 2.0;
+    if (in_ >= motion_tol)
+        out = in_ - motion_tol + friction_pos;
+    else if (in_ <= -motion_tol)
+        out = in_ + motion_tol + friction_neg;
+    else
+        out = (in_ + motion_tol) * gain + friction_neg;
+}	
+	

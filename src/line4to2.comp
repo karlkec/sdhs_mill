@@ -1,0 +1,36 @@
+component line4to2 "4 to 2 Line Encoder";
+pin in bit in0;
+pin in bit in1;
+pin in bit in2;
+pin in bit in3;
+pin out bit out0;
+pin out bit out1;
+function _;
+license "GPL";
+;;
+
+
+
+FUNCTION(_) {
+	rtapi_print_msg(RTAPI_MSG_INFO, "YADDA!\n");
+
+	if (in0 ) {
+	  out0 = 0;
+	  out1 = 0;
+	}
+
+	if (in1 ) {
+	  out0 = 1;
+	  out1 = 0;
+	}
+
+	if (in2 ) {
+	  out0 = 0;
+	  out1 = 1;
+	}
+
+	if (in3 ) {
+	  out0 = 1;
+	  out1 = 1;
+	}
+}

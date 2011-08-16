@@ -1,0 +1,34 @@
+# Include your customized HAL commands here
+# The commands in this file are run after the AXIS GUI (including PyVCP panel) starts
+
+# **** Setup of pyvcp buttons and MDI commands using HAL_UI and pyvcp - START ****
+
+net jog-x-pos  <=    pyvcp.jog-x+
+net jog-x-neg  <=    pyvcp.jog-x-
+net jog-y-pos  <=    pyvcp.jog-y+
+net jog-y-neg  <=    pyvcp.jog-y-
+net jog-z-pos  <=    pyvcp.jog-z+
+net jog-z-neg  <=    pyvcp.jog-z-
+net jog-speed  <=    pyvcp.jog-speed
+net optional-stp-on     pyvcp.ostop-on     =>  halui.program.optional-stop.on
+net optional-stp-off    pyvcp.ostop-off    =>  halui.program.optional-stop.off
+net optional-stp-is-on  pyvcp.ostop-is-on  =>  halui.program.optional-stop.is-on
+net program-pause       pyvcp.pause        =>  halui.program.pause
+net program-resume      pyvcp.resume       =>  halui.program.resume
+net program-single-step pyvcp.step         =>  halui.program.step
+
+# **** The following mdi-comands are specified in the machine named INI file under [HALUI] heading
+# **** command 00 - rapid to Z 0 ( G0 Z0 )
+# **** command 01 - rapid to reference point ( G 28 )
+# **** command 02 - zero X axis in G54 cordinate system
+# **** command 03 - zero Y axis in G54 cordinate system
+# **** command 04 - zero Z axis in G54 cordinate system
+
+net MDI-Z-up            pyvcp.MDI-z_up          =>  halui.mdi-command-00
+net MDI-reference-pos   pyvcp.MDI-reference     =>  halui.mdi-command-01
+net MDI-zero_X          pyvcp.MDI-zerox         =>  halui.mdi-command-02
+net MDI-zero_Y          pyvcp.MDI-zeroy         =>  halui.mdi-command-03
+net MDI-zero_Z          pyvcp.MDI-zeroz         =>  halui.mdi-command-04
+net MDI-clear-offset    pyvcp.MDI-clear-offset  =>  halui.mdi-command-05
+
+# **** Setup of pyvcp buttons and MDI commands using HAL_UI and pyvcp - END ****

@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<pyvcp>
+	<hbox>
+		<labelframe text="IO on connector 3"><bd>6</bd>
+			<vbox>
+				<hbox>	
+					<label><text>"In-12:"</text></label><led><size>15</size><halpin>"in12"</halpin></led>
+					<label><text>"  EncYb:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in00"</halpin></led>
+				</hbox>
+				<hbox>
+					<label><text>"In-13:"</text></label><led><size>15</size><halpin>"in13"</halpin></led>
+					<label><text>"  EncYa:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in01"</halpin></led>
+				</hbox>
+				<hbox>
+					<label><text>"In-14:"</text></label><led><size>15</size><halpin>"in14"</halpin></led>
+					<label><text>"  EncXb:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in02"</halpin></led>
+				</hbox>
+				<hbox>
+					<label><text>"In-15:"</text></label><led><size>15</size><halpin>"in15"</halpin></led>
+					<label><text>"  EncXa:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in03"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out24"</halpin><text>"Out-24"</text></button>
+					<label><text>"InxX1:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in04"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out25"</halpin><text>"Out-25"</text></button>
+					<label><text>"InxX0:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in05"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out28"</halpin><text>"Out-28"</text></button>
+					<label><text>"PWM Y:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in06"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out36"</halpin><text>"Out-36"</text></button>
+					<label><text>"PWM X:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in07"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out37"</halpin><text>"Out-37"</text></button>
+					<label><text>"DIR Y:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in08"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out38"</halpin><text>"Out-38"</text></button>
+					<label><text>"DIR X:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in09"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out39"</halpin><text>"Out-39"</text></button>
+					<label><text>"ENA Y:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in10"</halpin></led>
+				</hbox>
+				<hbox>
+					<button><halpin>"out40"</halpin><text>"Out-40"</text></button>
+					<label><text>"ENA X:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in11"</halpin></led>
+				</hbox>
+			</vbox>
+		</labelframe>
+
+		<labelframe text="IO on connector 4"><bd>6</bd>
+			<vbox>
+				<hbox>
+					<label><text>"In-28:"</text></label><led><size>15</size><halpin>"in28"</halpin></led>
+					<label><text>"  In-16:"</text></label><led><size>15</size><halpin>"in16"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"In-29:"</text></label><led><size>15</size><halpin>"in29"</halpin></led>
+					<label><text>"  In-17:"</text></label><led><size>15</size><halpin>"in17"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"In-30:"</text></label><led><size>15</size><halpin>"in30"</halpin></led>
+					<label><text>"  In-18:"</text></label><led><size>15</size><halpin>"in18"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"In-31:"</text></label><led><size>15</size><halpin>"in31"</halpin></led>
+					<label><text>"  In-19:"</text></label><led><size>15</size><halpin>"in19"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<button><halpin>"out41"</halpin><text>"Out-41"</text></button>
+					<label><text>"In-20:"</text></label><led><size>15</size><halpin>"in20"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<button><halpin>"out53"</halpin><text>"Out-53"</text></button>
+					<label><text>"In-21:"</text></label><led><size>15</size><halpin>"in21"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<button><halpin>"out54"</halpin><text>"Out-54"</text></button>
+					<label><text>"In-22:"</text></label><led><size>15</size><halpin>"in22"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<button><halpin>"out55"</halpin><text>"Out-55"</text></button>
+					<label><text>"In-23:"</text></label><led><size>15</size><halpin>"in23"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"ESTOP"</text></label><led><off_color>"black"</off_color><on_color>"red"</on_color><size>15</size><halpin>"ext_estop_in"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"Xposlimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"xposlimit"</halpin></led>
+					<label><text>"Xneglimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"xneglimit"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"Yposlimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"yposlimit"</halpin></led>
+					<label><text>"Yneglimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"yneglimit"</halpin></led>
+				</hbox>
+				<hbox>
+					<label><text>"Zposlimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"zposlimit"</halpin></led>
+					<label><text>"Zneglimit:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"zneglimit"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"Zhome:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"zhome"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"In-27:"</text></label><led><size>15</size><halpin>"in27"</halpin></led>
+				</hbox>
+
+				<hbox>
+					<label><text>"VFD Fault"</text></label><led><off_color>"black"</off_color><on_color>"red"</on_color><size>15</size><halpin>"vfd_fault"</halpin></led>
+					<button><halpin>"vfd_reset"</halpin><text>"Reset"</text></button>
+				</hbox>
+				<hbox>
+					<label><text>"   REV:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in66"</halpin></led>
+				</hbox>
+				<hbox>
+					<label><text>"   FOR:"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"in68"</halpin></led>
+				</hbox>
+			</vbox>
+		</labelframe>
+
+		<labelframe text="Encoders">
+			<bd>6</bd>
+			<vbox>
+				<hbox>
+					<label><text>"X Encoder Count:"</text></label>
+					<s32><width>8</width><halpin>"enc0"</halpin></s32>
+				</hbox>
+				<hbox>
+					<label><text>"X Position (inch):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"xpos"</halpin></number>
+				</hbox>
+				<hbox>
+					<label><text>"X Speed (in/sec):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"xvel"</halpin></number>
+				</hbox>
+				<hbox>
+					<label><text>"Y Encoder Count:"</text></label>
+					<s32><width>8</width><halpin>"enc1"</halpin></s32>
+				</hbox>
+				<hbox>
+					<label><text>"Y Position (inch):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"ypos"</halpin></number>
+				</hbox>
+				<hbox>
+					<label><text>"Y Speed (in/sec):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"yvel"</halpin></number>
+				</hbox>
+				<hbox>
+					<label><text>"Z Encoder Count:"</text></label>
+					<s32><width>8</width><halpin>"enc2"</halpin></s32>
+				</hbox>
+				<hbox>
+					<label><text>"Z Position (inch):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"zpos"</halpin></number>
+				</hbox>
+				<hbox>
+					<label><text>"Z Speed (in/sec):"</text></label>
+					<number><width>8</width><format>"+4.4f"</format><halpin>"zvel"</halpin></number>
+				</hbox>
+					<hbox>
+					<label><text>"Spindle Encoder Count"</text></label>
+					<s32><width>8</width><halpin>"enc3"</halpin></s32>
+				</hbox>
+				<hbox>
+					<label><text>"Spindle Motor RPM:"</text></label>
+					<number><width>8</width><halpin>"smrpm"</halpin></number>
+				</hbox>
+			</vbox>
+		</labelframe>
+
+		<labelframe text="Motion Control"><bd>6</bd>
+			<vbox>
+				<labelframe text="X-axis Drive">
+				<vbox>
+					<hbox>
+						<label><text>"Enable:"</text></label>
+						<checkbutton><halpin>"dac0-ena"</halpin></checkbutton>
+					</hbox>
+					<scale>
+						<halpin>"dac0"</halpin><resolution>0.01</resolution><orient>HORIZONTAL</orient><min_>-10</min_><max_>10</max_>
+					</scale>
+				  </vbox>
+				</labelframe>
+				<labelframe text="Y-axis Drive">
+				  <vbox>
+					<hbox>
+					  <label><text>"Enable:"</text></label>
+					  <checkbutton><halpin>"dac1-ena"</halpin></checkbutton>
+						</hbox>
+						<scale>
+							<halpin>"dac1"</halpin><resolution>0.01</resolution><orient>HORIZONTAL</orient><min_>-10</min_><max_>10</max_>
+						</scale>
+					  </vbox>
+					</labelframe>
+				<labelframe text="Z-axis Drive">
+				  <vbox>
+					<hbox>
+					  <label><text>"Enable:"</text></label>
+					  <checkbutton><halpin>"dac2-ena"</halpin></checkbutton>
+						</hbox>
+						<scale>
+							<halpin>"dac2"</halpin><resolution>0.01</resolution><orient>HORIZONTAL</orient><min_>-10</min_><max_>10</max_>
+						</scale>
+					  </vbox>
+					</labelframe>
+				<labelframe text="Spindle Drive">
+				  <vbox>
+					<hbox>
+					  <label><text>"Enable:"</text></label>
+					  <checkbutton><halpin>"dac3-ena"</halpin></checkbutton>
+						</hbox>
+						<scale>
+							<halpin>"dac3"</halpin><resolution>0.1</resolution><orient>HORIZONTAL</orient><min_>-10</min_><max_>10</max_>
+						</scale>
+					  </vbox>
+					</labelframe>
+				</vbox>
+			</labelframe>
+		<labelframe text="Tool Changer"><bd>6</bd>
+			<vbox>
+				<hbox>
+					<label><text>"Machine On:"</text></label>
+					<checkbutton><halpin>"machine-on"</halpin></checkbutton>
+				</hbox>
+				<hbox>
+					<label><text>"New Tool No. (0 for no tool):"</text></label>
+					<spinbox> <halpin>"new-tool-no"</halpin> <min_>0</min_> <max_>24</max_> <resolution>1</resolution> <format>"2f"</format> <font>('Arial',15)</font> </spinbox>
+				</hbox>
+				<button><halpin>"change-tool-btn"</halpin><text>"Change Tool"</text></button>
+				<hbox>
+					<label><text>"Current Tool No:"</text></label>
+					<s32><width>8</width><halpin>"cur-toolno-disp"</halpin></s32>
+				</hbox>
+				<hbox>
+					<label><text>"State:"</text></label>
+					<s32><width>8</width><halpin>"changer-state-disp"</halpin></s32>
+				</hbox>
+				<hbox>
+					<vbox>	
+						<hbox>
+						<label><text>"Change Request"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"request-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Changer is Homed"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"homed-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Change Complete"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"complete-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Auto Mode"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"auto-mode-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"QD Reset Output"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"reset-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"QD Claw Open"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"claw-open-led"</halpin></led>
+						</hbox>
+					</vbox>
+					<vbox>
+						<hbox>
+						<label><text>"QD Ready"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"qd-ready-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Tool-In"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"tool-in-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Tool-Out"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"tool-out-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Carousel-Home"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-home-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Carousel-CW"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-cw-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Carousel-CCW"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-ccw-led"</halpin></led>
+						</hbox>
+						<hbox>
+						<label><text>"Error"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"error-led"</halpin></led>
+						</hbox>
+					</vbox>
+				</hbox>
+				<hbox>
+					<label><text>"Test:"</text></label>
+					<s32><width>8</width><halpin>"test-display"</halpin></s32>
+				</hbox>
+			</vbox>
+		</labelframe>
+	</hbox>
+</pyvcp>

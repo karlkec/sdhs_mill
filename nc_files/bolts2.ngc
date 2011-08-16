@@ -1,0 +1,7 @@
+(For Drilling 10-32 tap holes in fan hub)
+(For drilling with 10-32 tap drill in fan)
+G81 X0.8750 Y0.0000 Z-0.7500  R0.30 F1.0
+X-0.4375 Y0.7578 Z-0.7500  R0.30 F1.0
+X-0.4375 Y-0.7578 Z-0.7500  R0.30 F1.0
+G80 (End of Cycle)
+M2

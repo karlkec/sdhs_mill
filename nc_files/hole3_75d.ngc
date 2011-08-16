@@ -1,0 +1,14 @@
+(Creates a hole 3.75 diameter. Assumes a 1" cutter. Machine is touched off at)
+(right-hand edge of hole, in center of cutter 1.375 to right of center of hole)
+(Assumes z is touched off at top of material)
+M3 S1400
+G0 X0 Y0 Z0.125
+G1 F2 Z-.625
+G2 F3 X-2.75 Y0 I-1.375 J0
+G2 F3 X0 Y0 I1.375 J0
+G1 Z-1.25 F2
+G2 F3 X-2.75 Y0 I-1.375 J0
+G2 F3 X0 Y0 I1.375 J0
+G0 Z+.5
+M5
+M2
