@@ -1,235 +1,129 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pyvcp>
- <vbox>
- <relief>RIDGE</relief>         
- <bd>6</bd>
-     <labelframe text="Set G92 Origin"> 
-     <font>("Helvetica",11)</font>
-	<bd>3</bd>
-		<vbox>
-        <hbox> 
-                <label><width>0</width></label>
-                <button>
-					<halpin>"MDI-zerox"</halpin>
-					<text>"  Zero X  "</text> 
-					<width>4</width>
-			   </button>
-                
-                <label><width>0</width></label>
-                <button>
-					<halpin>"MDI-zeroy"</halpin>
-					<text>"  Zero Y  "</text> 
-					<width>4</width>
-			   </button>
-                <label><width>0</width></label>
-                <button>
-					<halpin>"MDI-zeroz"</halpin>
-					<text>"  Zero Z  "</text> 
-					<width>4</width>
-			   </button>
-                <label><width>0</width></label>
-		</hbox>
-		<hbox>
-                <button>
-                            <halpin>"MDI-clear-offset"</halpin>
-                            <text>"  Clear G92 offset  "</text> 
-                </button>
-        </hbox>
-		</vbox>
-        </labelframe>
-         <labelframe text="Jog"> 
-		 <font>("Helvetica",11)</font>
-		<bd>3</bd>
-		<vbox><label><width>4</width></label></vbox>
-        <hbox> 
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-x+"</halpin>
-                            <text>" X + "</text> 
-							<width>4</width>
-                            <justify>"right"</justify>
-                            
-                       </button>
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-x-"</halpin>
-                            <text>" X - "</text> 
-							<width>4</width>
-                            <justify>"right"</justify>
-                            
-                       </button>
-        </hbox>
-        <hbox>
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-y+"</halpin>
-                            <text>" Y + "</text> 
-							<width>4</width>
-                       </button>
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-y-"</halpin>
-                            <text>" Y - "</text> 
-							<width>4</width>
-                       </button>
-        </hbox>
-        <hbox>
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-z+"</halpin>
-                            <text>" Z + "</text> 
-							<width>4</width>
-                       </button>
-                <label><width>3</width></label>
-                <button>
-                            <halpin>"jog-z-"</halpin>
-                            <text>" Z - "</text> 
-							<width>4</width>
-                       </button>
-        </hbox>
-        <hbox>
-                <label><width>3</width></label>
-                <label><text>"Jog Speed"</text></label>
-                <label><width>2</width></label>
-                <spinbox>
-                           <halpin>"jog-speed"</halpin>
-                           <min_>0</min_>
-                           <resolution>.5</resolution>
-                           <format>"2.1f"</format>
-                           <width>5</width>
-                           <font>("Arial",12)</font>
-                           <justify>RIGHT</justify>
-                           <initval>20</initval>
-                </spinbox>
-        </hbox>
-        
-        </labelframe>
-        <labelframe text="MDI comands"> 
-       <font>("Helvetica",11)</font>
-		<bd>3</bd>
-		<hbox>
-                     <button>
-                          <halpin>"MDI-z_up"</halpin>
-                          <text>"Goto Z Zero"</text> 
-                     </button>
-                     <button>
-                           <halpin>"MDI-reference"</halpin>
-                           <text>"Goto Reference"</text> 
-                     </button>
-		</hbox>
-        </labelframe>
-		<labelframe text="Optional Stop"> 
-        <font>("Helvetica",11)</font>
-		<bd>3</bd>
-        <hbox>
-			       <label><width>1</width></label>
-                       <button>
-                            <halpin>"ostop-on"</halpin>
-                            <text>"  on  "</text> 
-                       </button>
-                       <label><width>5</width></label>
-                       <led> 
-	                    <halpin>"ostop-is-on"</halpin>  
-			    <size>20</size>  
-			    <on_color>"blue"</on_color> 
-			    <off_color>"grey"</off_color> 
-			</led>	
-                        <label><width>5</width></label>
-                       <button>
-                             <halpin>"ostop-off"</halpin>
-                             <text>"  off  "</text> 
-                       </button>
-		</hbox>
-       </labelframe>
-		<labelframe text="Spindle Motor"> 
-		<bd>3</bd>
-        <font>("Helvetica",11)</font>
-		<vbox>
-			<hbox>
-				<relief>RIDGE</relief>         
-				<bd>2</bd>
-				<label>
-					<text>"Speed (RPM):"</text>
-					<font>("Helvetica",11)</font>
-				</label>
-				<label><width>2</width></label>
-				<vbox>
-					<label>
-						<text>"Commanded"</text>
-						<font>("Helvetica",10)</font>
-					</label>
-					<number>
-						<halpin>"commanded-rpm"</halpin>
-						<font>("Helvetica",10)</font>
-						<format>".0f"</format>
-					</number>
-				</vbox>
-				<label><width>2</width></label>
-				<vbox>
-					<label>
-						<text>"Actual"</text>
-						<font>("Helvetica",10)</font>
-					</label>
-					<number>
-						<halpin>"motor-rpm"</halpin>
-						<font>("Helvetica",10)</font>
-						<format>".0f"</format>
-					</number>
-				</vbox>
-				<label><width>1</width></label>
-			</hbox>
-			<hbox>
-				<label><width>1</width></label>
-				<relief>RIDGE</relief>         
-				<bd>2</bd>
-				<label>
-					<width>10</width>
-					<text>"Drive Fault:"</text>
-					<font>("Helvetica",11)</font>
-				</label>
-				<label><width>1</width></label>
-				<led> 
-						<halpin>"vfd-fault"</halpin>  
-						<size>20</size>  
-						<on_color>"red"</on_color> 
-						<off_color>"grey"</off_color> 
-				</led>	
-				<label><width>3</width></label>
-					<button>
-						<halpin>"vfd-reset"</halpin>
-						<text>" RESET "</text> 
-						<width>6</width>
-						<font>("Helvetica",10)</font>
-					</button>
-				<label><width>5</width></label>
-			</hbox>
-		</vbox>
-		</labelframe>
-    <labelframe text="Program Control"> 
-    <font>("Helvetica",11)</font>
-	<bd>3</bd>
-		<hbox>
-		      <vbox>
-			<button>
-                            <halpin>"pause"</halpin>
-                            <text>"Pause"</text> 
-                            <bg>"red"</bg>
-                       </button>
-		       </vbox>
-                       <button>
-                            <halpin>"resume"</halpin>
-                            <text>"Resume"</text>
-                            <bg>"green"</bg> 
-                       </button>
-                       <button>
-                             <halpin>"step"</halpin>
-                             <text>"Single block"</text> 
-                             <bg>"yellow"</bg>
-                       </button>
+	<vbox>
+		<relief>RIDGE</relief>         
+		<bd>6</bd>
+		<labelframe text="Set G92 Origin"> 
+			<font>("Helvetica",11)</font>
+			<bd>3</bd>
 			<vbox>
+			<hbox> 
+				<label><width>0</width></label> 
+				<button> <halpin>"MDI-zerox"</halpin> <text>"  Zero X  "</text> <width>4</width> </button>
+				<label><width>0</width></label>
+				<button> <halpin>"MDI-zeroy"</halpin> <text>"  Zero Y  "</text> <width>4</width> </button>
+				<label><width>0</width></label>
+				<button> <halpin>"MDI-zeroz"</halpin> <text>"  Zero Z  "</text> <width>4</width> </button>
+				<label><width>0</width></label>
+			</hbox>
+			<hbox>
+				<button> <halpin>"MDI-clear-offset"</halpin> <text>"  Clear G92 offset  "</text> </button> </hbox>
 			</vbox>
-		</hbox>
-       </labelframe>
- </vbox>
- 
+		</labelframe>
+		<labelframe text="Jog"> 
+			<font>("Helvetica",11)</font> <bd>3</bd>
+			<vbox>
+				<label><width>4</width></label>
+			</vbox>
+			<hbox> 
+				<label><width>3</width></label>
+				<button> <halpin>"jog-x+"</halpin> <text>" X + "</text> <width>4</width> <justify>"right"</justify> </button>
+				<label><width>3</width></label>
+				<button> <halpin>"jog-x-"</halpin> <text>" X - "</text> <width>4</width> <justify>"right"</justify> </button>
+			</hbox>
+			<hbox>
+				<label><width>3</width></label>
+				<button> <halpin>"jog-y+"</halpin> <text>" Y + "</text> <width>4</width> </button>
+				<label><width>3</width></label>
+				<button> <halpin>"jog-y-"</halpin> <text>" Y - "</text> <width>4</width> </button>
+			</hbox>
+			<hbox>
+				<label><width>3</width></label>
+				<button> <halpin>"jog-z+"</halpin> <text>" Z + "</text> <width>4</width> </button>
+				<label><width>3</width></label>
+				<button> <halpin>"jog-z-"</halpin> <text>" Z - "</text> <width>4</width> </button>
+			</hbox>
+			<hbox>
+				<label><width>3</width></label>
+				<label><text>"Jog Speed"</text></label>
+				<label><width>2</width></label>
+				<spinbox>
+					<halpin>"jog-speed"</halpin>
+					<min_>0</min_>
+					<resolution>.5</resolution>
+					<format>"2.1f"</format>
+					<width>5</width>
+					<font>("Arial",12)</font>
+					<justify>RIGHT</justify>
+					<initval>20</initval>
+				</spinbox>
+			</hbox>
+		</labelframe>
+		<labelframe text="MDI comands"> 
+			<font>("Helvetica",11)</font>
+			<bd>3</bd>
+			<hbox>
+				 <button> <halpin>"MDI-z_up"</halpin> <text>"Goto Z Zero"</text> </button>
+				 <button> <halpin>"MDI-reference"</halpin> <text>"Goto Reference"</text> </button>
+			</hbox>
+		</labelframe>
+		<labelframe text="Optional Stop"> 
+			<font>("Helvetica",11)</font>
+			<bd>3</bd>
+			<hbox>
+				<label><width>1</width></label>
+				<button> <halpin>"ostop-on"</halpin> <text>"  on  "</text> </button>
+				<label><width>5</width></label>
+				<led> <halpin>"ostop-is-on"</halpin>  <size>20</size>  <on_color>"blue"</on_color> <off_color>"grey"</off_color> </led>	
+				<label><width>5</width></label>
+				<button> <halpin>"ostop-off"</halpin> <text>"  off  "</text> </button>
+			</hbox>
+		</labelframe>
+		<labelframe text="Spindle Motor"> 
+			<bd>3</bd>
+			<font>("Helvetica",11)</font>
+			<vbox>
+				<hbox>
+					<relief>RIDGE</relief>         
+					<bd>2</bd>
+					<label> <text>"Speed (RPM):"</text> <font>("Helvetica",11)</font> </label>
+					<label><width>2</width></label>
+					<vbox>
+						<label> <text>"Commanded"</text> <font>("Helvetica",10)</font> </label>
+						<number> <halpin>"commanded-rpm"</halpin> <font>("Helvetica",10)</font> <format>".0f"</format> </number>
+					</vbox>
+					<label><width>2</width></label>
+					<vbox>
+						<label> <text>"Actual"</text> <font>("Helvetica",10)</font> </label>
+						<number> <halpin>"motor-rpm"</halpin> <font>("Helvetica",10)</font> <format>".0f"</format> </number>
+					</vbox>
+					<label><width>1</width></label>
+				</hbox>
+				<hbox>
+					<label><width>1</width></label>
+					<relief>RIDGE</relief>         
+					<bd>2</bd>
+					<label> <width>10</width> <text>"Drive Fault:"</text> <font>("Helvetica",11)</font> </label>
+					<label><width>1</width></label>
+					<led> <halpin>"vfd-fault"</halpin>  <size>20</size>  <on_color>"red"</on_color> <off_color>"grey"</off_color> </led>	
+					<label><width>3</width></label>
+					<button> <halpin>"vfd-reset"</halpin> <text>" RESET "</text> <width>6</width> <font>("Helvetica",10)</font> </button>
+					<label><width>5</width></label>
+				</hbox>
+			</vbox>
+		</labelframe>
+		<labelframe text="Program Control"> 
+			<font>("Helvetica",11)</font>
+			<bd>3</bd>
+			<hbox>
+				<vbox>
+					<button> <halpin>"pause"</halpin> <text>"Pause"</text> <bg>"red"</bg> </button>
+				</vbox>
+				<button> <halpin>"resume"</halpin> <text>"Resume"</text> <bg>"green"</bg> </button>
+				<button> <halpin>"step"</halpin> <text>"Single block"</text> <bg>"yellow"</bg> </button>
+				<vbox>
+				</vbox>
+			</hbox>
+		</labelframe>
+	</vbox>
 </pyvcp>
