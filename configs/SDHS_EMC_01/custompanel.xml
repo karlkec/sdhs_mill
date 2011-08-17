@@ -136,19 +136,6 @@
 				<bd>3</bd>
 				<vbox>
 					<hbox>
-						<label><text>"Machine On:"</text></label>
-						<checkbutton><halpin>"machine-on"</halpin></checkbutton>
-					</hbox>
-					<hbox>
-						<label><text>"New Tool No. (0 for no tool):"</text></label>
-						<spinbox> <halpin>"new-tool-no"</halpin> <min_>0</min_> <max_>24</max_> <resolution>1</resolution> <format>"2f"</format> <font>('Arial',15)</font> </spinbox>
-					</hbox>
-					<button><halpin>"change-tool-btn"</halpin><text>"Change Tool"</text></button>
-					<hbox>
-						<label><text>"Current Tool No:"</text></label>
-						<s32><width>8</width><halpin>"cur-toolno-disp"</halpin></s32>
-					</hbox>
-					<hbox>
 						<label><text>"State:"</text></label>
 						<s32><width>8</width><halpin>"changer-state-disp"</halpin></s32>
 					</hbox>
