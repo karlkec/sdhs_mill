@@ -9,6 +9,10 @@ pin in bit carousel_home_command "Turret Home command to the tool changer.";
 pin out bit qd_complete "Reset signal from the Quickdraw Tool Changer that the current operation is complete";
 pin out bit claw_open_out "Indication that the claw is being held in the opon position.";
 
+pin out signed cur_tool_no "Current tool number";
+pin out signed cur_state_out "Current State";
+pin out bit arm_spindle "Arm is at the Spindle";
+
 param rw unsigned carousel_home_time=10.0 "Time in seconds for the carousel to home.";
 param rw unsigned carousel_move_time=1.2 "Time in seconds for the carousel to move one tool position.";
 param rw unsigned arm_move_time=7.0 "Time in seconds for moving a tool from the carousel to or from the spindle.";
@@ -28,13 +32,13 @@ function _ ;
 
 // State names defined
 typedef enum {
-	STATE_IDLE,
-	STATE_TOOL_OUT,
-	STATE_TOOL_IN,
-	STATE_CAROUSEL_CW,
-	STATE_CAROUSEL_CCW,
-	STATE_CAROUSEL_HOME,
-	STATE_COMPL
+	STATE_IDLE, // 0
+	STATE_TOOL_OUT, // 1
+	STATE_TOOL_IN, // 2
+	STATE_CAROUSEL_CW, // 3
+	STATE_CAROUSEL_CCW, // 4
+	STATE_CAROUSEL_HOME, // 5
+	STATE_COMPL // 6
 } States;
 
 #define STATE_STACK_DEPTH 10
@@ -66,17 +70,21 @@ FUNCTION(_) {
 				cur_state = STATE_TOOL_IN;
 			} else if(tool_out_command) {
 				cur_state = STATE_TOOL_OUT;
-			} else if(carousel_cw_command || carousel_ccw_command) {
+			} else if(carousel_cw_command) {
 				cur_state = STATE_CAROUSEL_CW;
+			} else if(carousel_ccw_command) {
+				cur_state = STATE_CAROUSEL_CCW;
 			} else if(carousel_home_command) {
 				cur_state = STATE_CAROUSEL_HOME;
 			}
 			break; // STATE_IDLE
 
-		case STATE_TOOL_OUT:
+		case STATE_TOOL_OUT: // 1
 			if(state_changed) {
-				claw_open = FALSE;
 				timer = 0.0;
+				/* Claw will close if at spindle */
+				if(arm_at_spindle)
+					claw_open = FALSE;
 			} else if(!arm_at_spindle || timer > arm_move_time) {
 				// Arm already at the carousel, or time has passed
 				arm_at_spindle = FALSE;
@@ -84,7 +92,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_INIT
 
-		case STATE_TOOL_IN:
+		case STATE_TOOL_IN: // 2
 			if(state_changed) {
 				claw_open = FALSE;
 				timer = 0.0;
@@ -95,7 +103,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_INIT
 
-		case STATE_CAROUSEL_CW: // Move clockwise
+		case STATE_CAROUSEL_CW: // Move clockwise. State 3
 			if (state_changed) {
 				timer = 0.0;
 			} else if(timer > carousel_move_time) {
@@ -107,7 +115,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_CAROUSEL_CW
 
-		case STATE_CAROUSEL_CCW: // Move Counterclockwise
+		case STATE_CAROUSEL_CCW: // Move Counterclockwise. State 4
 			if (state_changed) {
 				timer = 0.0;
 			} else if(timer > carousel_move_time) {
@@ -119,7 +127,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_CAROUSEL_CW
 
-		case STATE_CAROUSEL_HOME:
+		case STATE_CAROUSEL_HOME: // State 5
 			if(state_changed) {
 				timer = 0.0;
 				home_time = carousel_move_time * (cur_pocket_no - 1);
@@ -130,7 +138,7 @@ FUNCTION(_) {
 			}
 			break; // STATE_CAROUSEL_HOME
 
-		case STATE_COMPL:
+		case STATE_COMPL: // State 6
 			/* Sets the complete output for the allowed time, 
 			 * and after a different time sets the claw open indication */
 			if(state_changed) {
@@ -153,4 +161,7 @@ FUNCTION(_) {
 	/* Update outputs */
 	qd_complete = compl_out;
 	claw_open_out = claw_open;
+	cur_tool_no = cur_pocket_no;
+	cur_state_out = cur_state;
+	arm_spindle = arm_at_spindle;
 }
