@@ -1,9 +1,7 @@
 ############# Tool Changer #####################
 
 loadrt qdtoolchange
-loadrt qdsim
 addf qdtoolchange servo-thread
-addf qdsim servo-thread
 loadrt or2 count=1
 addf or2.0 servo-thread
 loadrt and2 count=2
@@ -32,14 +30,16 @@ net tool-changed-ored or2.0.out iocontrol.0.tool-changed
 # Machine on bit, to reset errors in the tool changer
 net machine-on <= halui.machine.is-on => qdtoolchange.machine-on
 
-# Hardware inputs from the simulated tool changer to the qdtoolchange component
-net qd-reset <= qdsim.qd-reset => qdtoolchange.qd-complete
-net claw-open <= qdsim.claw-open-out => qdtoolchange.claw-open
+# Hardware inputs from the tool changer hardware to the qdtoolchange component
+net qd-reset <= hm2_5i20.0.gpio.054.in_not => qdtoolchange.qd-complete
+# Claw open not working on hardware microswitch
+#net claw-open <= hm2_5i20.0.gpio.055.in_not => qdtoolchange.claw-open
+setp qdtoolchange.claw-open 1
 
 # Output commands from qdtoolchange component to tool changer hardware
-net tool-out-command <= qdtoolchange.tool-out-command => qdsim.tool-out-command
-net tool-in-command <= qdtoolchange.tool-in-command => qdsim.tool-in-command
-net carousel-cw-command <= qdtoolchange.carousel-cw-command => qdsim.carousel-cw-command
-net carousel-ccw-command <= qdtoolchange.carousel-ccw-command => qdsim.carousel-ccw-command
-net carousel-home-command <= qdtoolchange.carousel-home-command => qdsim.carousel-home-command
+net tool-out-command <= qdtoolchange.tool-out-command => hm2_5i20.0.gpio.065.out
+net carousel-cw-command <= qdtoolchange.carousel-cw-command => hm2_5i20.0.gpio.067.out
+net carousel-ccw-command <= qdtoolchange.carousel-ccw-command => hm2_5i20.0.gpio.069.out
+net carousel-home-command <= qdtoolchange.carousel-home-command => hm2_5i20.0.gpio.070.out
+net tool-in-command <= qdtoolchange.tool-in-command => hm2_5i20.0.gpio.071.out
 

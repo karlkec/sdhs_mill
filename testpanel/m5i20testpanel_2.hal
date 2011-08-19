@@ -249,8 +249,8 @@ net qd-error <= qdtoolchange.error-flag => iotest.error-led
 
 # Hardware inputs from the tool changer to the qdtoolchange component
 net qd-reset <= hm2_5i20.0.gpio.054.in_not => qdtoolchange.qd-complete
-#net claw-open <= hm2_5i20.0.gpio.055.in_not => qdtoolchange.claw-open
 # Claw open not working on hardware microswitch
+#net claw-open <= hm2_5i20.0.gpio.055.in_not => qdtoolchange.claw-open
 setp qdtoolchange.claw-open 1
 net auto-mode <= hm2_5i20.0.gpio.063.in_not => qdtoolchange.qd-auto
 
