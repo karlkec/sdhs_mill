@@ -121,17 +121,17 @@ typedef enum {
 } error_codes;
 
 const char *error_str[] = {
-	"No Error",
-	"Tool Number out of Range",
-	"Quickdraw Took Too Long to Move the Arm to the Carousel",
-	"Quickdraw Took Too Long to Move the Arm to the Spindle",
-	"",
-	"qd-complete Input (Quickdraw RESET Output) Set for Too Long",
-	"Quickdraw Took Too Long to Move the Carousel",
-	"Quickdraw Took Too Long to Home the Carousel",
-	"Quickdraw not Turned On in AUTO Mode",
-	"Quickdraw Claw not Reported Open. Got Compressed Air?",
-	"Quickdraw Claw Open Timed Out. Got Compressed Air?",
+	"Quickdraw Tool Changer -- No Error",
+	"Quickdraw Tool Changer -- Tool Number out of Range",
+	"Quickdraw Tool Changer -- Too Long to Move to Carousel",
+	"Quickdraw Tool Changer -- Too Long to Move to Spindle",
+	"Quickdraw Tool Changer -- Reset Line Did Not Acuate",
+	"Quickdraw Tool Changer -- RESET Relay Stuck Closed",
+	"Quickdraw Tool Changer -- Too Long to Move the Carousel",
+	"Quickdraw Tool Changer -- Too Long to Home the Carousel",
+	"Quickdraw Tool Changer -- Not Turned On in AUTO Mode",
+	"Quickdraw Tool Changer -- Claw not Reported Open. Got Compressed Air?",
+	"Quickdraw Tool Changer -- Claw Open Timed Out. Got Compressed Air?",
 };
 
 // Time conversions
