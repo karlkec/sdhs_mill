@@ -1,0 +1,45 @@
+############# Tool Changer #####################
+
+loadrt qdtoolchange
+loadrt qdsim
+addf qdtoolchange servo-thread
+addf qdsim servo-thread
+loadrt or2 count=1
+addf or2.0 servo-thread
+loadrt and2 count=2
+addf and2.0 servo-thread
+addf and2.1 servo-thread
+
+unlinkp iocontrol.0.tool-change
+unlinkp iocontrol.0.tool-changed
+unlinkp iocontrol.0.tool-prep-number
+
+
+# The manual or auto tool changer gets selected here
+net tool-change-in iocontrol.0.tool-change => and2.0.in0 and2.1.in0
+net tool-change-auto <= and2.0.out => qdtoolchange.tool-change
+net tool-change-man  <= and2.1.out => hal_manualtoolchange.change
+
+net tool-prep-number <= iocontrol.0.tool-prep-number => hal_manualtoolchange.number 
+net tool-prep-number => qdtoolchange.tool-num
+
+# Or the change complete outputs of the automatic 
+# and manual tool changers together to feed to iocontrol.
+net tc-complete <= qdtoolchange.tool-changed => or2.0.in0
+net tool-changed <= hal_manualtoolchange.changed => or2.0.in1
+net tool-changed-ored or2.0.out iocontrol.0.tool-changed
+
+# Machine on bit, to reset errors in the tool changer
+net machine-on <= halui.machine.is-on => qdtoolchange.machine-on
+
+# Hardware inputs from the simulated tool changer to the qdtoolchange component
+net qd-reset <= qdsim.qd-reset => qdtoolchange.qd-complete
+net claw-open <= qdsim.claw-open-out => qdtoolchange.claw-open
+
+# Output commands from qdtoolchange component to tool changer hardware
+net tool-out-command <= qdtoolchange.tool-out-command => qdsim.tool-out-command
+net tool-in-command <= qdtoolchange.tool-in-command => qdsim.tool-in-command
+net carousel-cw-command <= qdtoolchange.carousel-cw-command => qdsim.carousel-cw-command
+net carousel-ccw-command <= qdtoolchange.carousel-ccw-command => qdsim.carousel-ccw-command
+net carousel-home-command <= qdtoolchange.carousel-home-command => qdsim.carousel-home-command
+
