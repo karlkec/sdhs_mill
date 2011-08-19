@@ -255,45 +255,58 @@
 				<hbox>
 					<vbox>	
 						<hbox>
-						<label><text>"Change Request"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"request-led"</halpin></led>
+							<label><text>"Change Request"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"request-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Changer is Homed"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"homed-led"</halpin></led>
+							<label><text>"Changer is Homed"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"homed-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Change Complete"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"complete-led"</halpin></led>
+							<label><text>"Change Complete"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"complete-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Auto Mode"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"auto-mode-led"</halpin></led>
+							<label><text>"Auto Mode"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"auto-mode-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"QD Reset Output"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"reset-led"</halpin></led>
+							<label><text>"QD Reset Output"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"reset-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"QD Claw Open"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"claw-open-led"</halpin></led>
+							<label><text>"QD Claw Open"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"claw-open-led"</halpin></led>
 						</hbox>
 					</vbox>
 					<vbox>
 						<hbox>
-						<label><text>"QD Ready"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"qd-ready-led"</halpin></led>
+							<label><text>"QD Ready"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"qd-ready-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Tool-In"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"tool-in-led"</halpin></led>
+							<label><text>"Tool-In"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"tool-in-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Tool-Out"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"tool-out-led"</halpin></led>
+							<label><text>"Tool-Out"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"tool-out-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Carousel-Home"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-home-led"</halpin></led>
+							<label><text>"Carousel-Home"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"car-home-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Carousel-CW"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-cw-led"</halpin></led>
+							<label><text>"Carousel-CW"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"car-cw-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Carousel-CCW"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"car-ccw-led"</halpin></led>
+							<label><text>"Carousel-CCW"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"car-ccw-led"</halpin></led>
 						</hbox>
 						<hbox>
-						<label><text>"Error"</text></label><led><off_color>"black"</off_color><size>15</size><halpin>"error-led"</halpin></led>
+							<label><text>"Error"</text></label>
+							<led><off_color>"black"</off_color><size>15</size><halpin>"error-led"</halpin></led>
 						</hbox>
 					</vbox>
 				</hbox>
