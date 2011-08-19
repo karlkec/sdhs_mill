@@ -1,4 +1,5 @@
 ############# Tool Changer #####################
+loadusr -W hal_manualtoolchange
 
 loadrt qdtoolchange
 addf qdtoolchange servo-thread
