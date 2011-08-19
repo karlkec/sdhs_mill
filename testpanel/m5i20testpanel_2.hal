@@ -178,30 +178,37 @@ setp hm2_5i20.0.pwmgen.02.scale -10.0
 #  to the hardware output lines.
 
 # pins 65, through 71 are all active low open-drain outputs, and so will be inverted
-setp hm2_5i20.0.gpio.064.is_output 1
-setp hm2_5i20.0.gpio.065.is_output 1
-setp hm2_5i20.0.gpio.066.is_output 1
-setp hm2_5i20.0.gpio.067.is_output 1
-setp hm2_5i20.0.gpio.068.is_output 1
-setp hm2_5i20.0.gpio.069.is_output 1
-setp hm2_5i20.0.gpio.070.is_output 1
-setp hm2_5i20.0.gpio.071.is_output 1
-setp hm2_5i20.0.gpio.064.is_opendrain 1
-setp hm2_5i20.0.gpio.065.is_opendrain 1
-setp hm2_5i20.0.gpio.066.is_opendrain 1
-setp hm2_5i20.0.gpio.067.is_opendrain 1
-setp hm2_5i20.0.gpio.068.is_opendrain 1
-setp hm2_5i20.0.gpio.069.is_opendrain 1
-setp hm2_5i20.0.gpio.070.is_opendrain 1
-setp hm2_5i20.0.gpio.071.is_opendrain 1
-setp hm2_5i20.0.gpio.064.invert_output 1
-setp hm2_5i20.0.gpio.065.invert_output 1
-setp hm2_5i20.0.gpio.066.invert_output 1
-setp hm2_5i20.0.gpio.067.invert_output 1
-setp hm2_5i20.0.gpio.068.invert_output 1
-setp hm2_5i20.0.gpio.069.invert_output 1
-setp hm2_5i20.0.gpio.070.invert_output 1
-setp hm2_5i20.0.gpio.071.invert_output 1
+setp hm2_5i20.0.gpio.064.is_output true
+setp hm2_5i20.0.gpio.064.invert_output true
+setp hm2_5i20.0.gpio.064.is_opendrain true
+
+setp hm2_5i20.0.gpio.065.is_output true
+setp hm2_5i20.0.gpio.065.invert_output true
+setp hm2_5i20.0.gpio.065.is_opendrain true
+
+setp hm2_5i20.0.gpio.066.is_output true
+setp hm2_5i20.0.gpio.066.invert_output true
+setp hm2_5i20.0.gpio.066.is_opendrain true
+
+setp hm2_5i20.0.gpio.067.is_output true
+setp hm2_5i20.0.gpio.067.invert_output true
+setp hm2_5i20.0.gpio.067.is_opendrain true
+
+setp hm2_5i20.0.gpio.068.is_output true
+setp hm2_5i20.0.gpio.068.invert_output true
+setp hm2_5i20.0.gpio.068.is_opendrain true
+
+setp hm2_5i20.0.gpio.069.is_output true
+setp hm2_5i20.0.gpio.069.invert_output true
+setp hm2_5i20.0.gpio.069.is_opendrain true
+
+setp hm2_5i20.0.gpio.070.is_output true
+setp hm2_5i20.0.gpio.070.invert_output true
+setp hm2_5i20.0.gpio.070.is_opendrain true
+
+setp hm2_5i20.0.gpio.071.is_output true
+setp hm2_5i20.0.gpio.071.invert_output true
+setp hm2_5i20.0.gpio.071.is_opendrain true
 
 # Spindle drive uses an absolute value output
 net pwm3_val <= iotest.dac3-f => abs.0.in

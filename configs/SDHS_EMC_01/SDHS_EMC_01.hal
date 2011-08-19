@@ -93,25 +93,22 @@ addf hm2_5i20.0.write         servo-thread
 addf hm2_5i20.0.pet_watchdog  servo-thread
 
 # --- COOLANT-MIST ---
-    setp hm2_5i20.0.gpio.065.is_output true
+setp hm2_5i20.0.gpio.065.is_output true
 net coolant-mist     =>  hm2_5i20.0.gpio.065.out
-# --- SPINDLE-CCW ---
-    setp hm2_5i20.0.gpio.066.is_output true
-    setp hm2_5i20.0.gpio.066.invert_output true
-net spindle-ccw     =>  hm2_5i20.0.gpio.066.out
 # --- COOLANT-FLOOD ---
-    setp hm2_5i20.0.gpio.067.is_output true
+setp hm2_5i20.0.gpio.067.is_output true
 net coolant-flood     =>  hm2_5i20.0.gpio.067.out
-# --- SPINDLE-CW ---
-    setp hm2_5i20.0.gpio.068.is_output true
-    setp hm2_5i20.0.gpio.068.invert_output true
-net spindle-cw     =>  hm2_5i20.0.gpio.068.out
-# --- SPINDLE-ENABLE ---
-    setp hm2_5i20.0.gpio.070.is_output true
-    setp hm2_5i20.0.gpio.070.invert_output true
-net spindle-enable     =>  hm2_5i20.0.gpio.070.out
 
-# external input signals
+# --- SPINDLE-CCW ---
+setp hm2_5i20.0.gpio.066.is_output true
+setp hm2_5i20.0.gpio.066.invert_output true
+setp hm2_5i20.0.gpio.066.is_opendrain true
+net spindle-ccw     =>  hm2_5i20.0.gpio.066.out
+# --- SPINDLE-CW ---
+setp hm2_5i20.0.gpio.068.is_output true
+setp hm2_5i20.0.gpio.068.invert_output true
+setp hm2_5i20.0.gpio.068.is_opendrain true
+net spindle-cw     =>  hm2_5i20.0.gpio.068.out
 
 
 #*******************
