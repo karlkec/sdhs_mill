@@ -45,7 +45,10 @@ net MDI-clear-offset    pyvcp.MDI-clear-offset  =>  halui.mdi-command-05
 # Dump the setup to a file
 save all hal_config.txt
 
-# Tool Changer
+############## Tool Changer ####################
+# Select auto vs manual tool changer
+net sel-auto-tc <= pyvcp.man-auto-sel.Auto => and2.0.in1
+net sel-man-tc  <= pyvcp.man-auto-sel.Manual => and2.1.in1
 # pyvcp hardware monitoring
 net tool-change-auto => pyvcp.request-led
 net tool-changed-ored => pyvcp.complete-led
