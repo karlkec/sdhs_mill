@@ -108,12 +108,13 @@ addf near.0                   servo-thread
 addf hm2_5i20.0.write         servo-thread
 addf hm2_5i20.0.pet_watchdog  servo-thread
 
+# Caution -- outputs 065 and 067 now used for tool changer
 # --- COOLANT-MIST ---
-setp hm2_5i20.0.gpio.065.is_output true
-net coolant-mist     =>  hm2_5i20.0.gpio.065.out
+#setp hm2_5i20.0.gpio.065.is_output true
+#net coolant-mist     =>  hm2_5i20.0.gpio.065.out
 # --- COOLANT-FLOOD ---
-setp hm2_5i20.0.gpio.067.is_output true
-net coolant-flood     =>  hm2_5i20.0.gpio.067.out
+#setp hm2_5i20.0.gpio.067.is_output true
+#net coolant-flood     =>  hm2_5i20.0.gpio.067.out
 
 # --- SPINDLE-CCW ---
 setp hm2_5i20.0.gpio.066.is_output true

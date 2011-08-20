@@ -1,4 +1,7 @@
 # components
+loadrt and2 count=2 
+loadrt or2 count=1 
+loadrt qdtoolchange 
 loadrt pid num_chan=7 
 loadrt classicladder_rt numPhysInputs=15 numPhysOutputs=15 numS32in=10 numS32out=10 numFloatIn=10 numFloatOut=10 
 loadrt near 
@@ -65,8 +68,13 @@ net MDI-reference-pos pyvcp.MDI-reference => halui.mdi-command-01
 net MDI-zero_X pyvcp.MDI-zerox => halui.mdi-command-02
 net MDI-zero_Y pyvcp.MDI-zeroy => halui.mdi-command-03
 net MDI-zero_Z pyvcp.MDI-zeroz => halui.mdi-command-04
-net coolant-flood iocontrol.0.coolant-flood => hm2_5i20.0.gpio.067.out
-net coolant-mist iocontrol.0.coolant-mist => hm2_5i20.0.gpio.065.out
+net auto-mode hm2_5i20.0.gpio.063.in_not => qdtoolchange.qd-auto
+net carousel-ccw-command qdtoolchange.carousel-ccw-command => hm2_5i20.0.gpio.069.out
+net carousel-cw-command qdtoolchange.carousel-cw-command => hm2_5i20.0.gpio.067.out
+net carousel-home-command qdtoolchange.carousel-home-command => hm2_5i20.0.gpio.070.out
+net claw-open hm2_5i20.0.gpio.055.in => qdtoolchange.claw-open
+net coolant-flood iocontrol.0.coolant-flood
+net coolant-mist iocontrol.0.coolant-mist
 net dout-00 motion.digital-out-00
 net dout-01 motion.digital-out-01
 net dout-02 motion.digital-out-02
@@ -82,6 +90,7 @@ net jog-y-neg pyvcp.jog-y-
 net jog-y-pos pyvcp.jog-y+
 net jog-z-neg pyvcp.jog-z-
 net jog-z-pos pyvcp.jog-z+
+net machine-on halui.machine.is-on => qdtoolchange.machine-on
 net optional-stp-is-on halui.program.optional-stop.is-on => pyvcp.ostop-is-on
 net optional-stp-off pyvcp.ostop-off => halui.program.optional-stop.off
 net optional-stp-on pyvcp.ostop-on => halui.program.optional-stop.on
@@ -89,11 +98,12 @@ net probe-in motion.probe-input
 net program-pause pyvcp.pause => halui.program.pause
 net program-resume pyvcp.resume => halui.program.resume
 net program-single-step pyvcp.step => halui.program.step
+net qd-reset hm2_5i20.0.gpio.054.in_not => qdtoolchange.qd-complete
 net reset-vfd pyvcp.vfd-reset => hm2_5i20.0.gpio.064.out
 net spindle-at-speed near.0.out
 net spindle-ccw motion.spindle-reverse => hm2_5i20.0.gpio.066.out
 net spindle-cw motion.spindle-forward => hm2_5i20.0.gpio.068.out
-net spindle-enable motion.spindle-on => hm2_5i20.0.gpio.070.out hm2_5i20.0.pwmgen.03.enable
+net spindle-enable motion.spindle-on => hm2_5i20.0.pwmgen.03.enable
 net spindle-index-enable hm2_5i20.0.encoder.03.index-enable <=> motion.spindle-index-enable
 net spindle-revs motion.spindle-revs pyvcp.motor-rpm
 net spindle-vel-cmd motion.spindle-speed-out => abs.3.in pyvcp.commanded-rpm
@@ -101,9 +111,15 @@ net spindle-vel-cmd-rps motion.spindle-speed-out-rps => near.0.in1
 net spindle-vel-fb motion.spindle-speed-in near.0.in2
 net spindle-vel-inv abs.3.out => mult2.0.in0
 net spindle-vel-output mult2.0.out => hm2_5i20.0.pwmgen.03.value
-net tool-change-confirmed hal_manualtoolchange.changed => iocontrol.0.tool-changed
-net tool-change-request iocontrol.0.tool-change => hal_manualtoolchange.change
-net tool-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number
+net tc-complete qdtoolchange.tool-changed => or2.0.in0
+net tool-change-auto and2.0.out => qdtoolchange.tool-change
+net tool-change-in iocontrol.0.tool-change => and2.0.in0 and2.1.in0
+net tool-change-man and2.1.out => hal_manualtoolchange.change
+net tool-changed hal_manualtoolchange.changed => or2.0.in1
+net tool-changed-ored or2.0.out => iocontrol.0.tool-changed
+net tool-in-command qdtoolchange.tool-in-command => hm2_5i20.0.gpio.071.out
+net tool-out-command qdtoolchange.tool-out-command => hm2_5i20.0.gpio.065.out
+net tool-prep-number iocontrol.0.tool-prep-number => hal_manualtoolchange.number qdtoolchange.tool-num
 net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
 net vfd-fault hm2_5i20.0.gpio.052.in => pyvcp.vfd-fault
 net vfd-ok hm2_5i20.0.gpio.052.in_not => motion.enable
@@ -130,11 +146,13 @@ net zpos-cmd axis.2.motor-pos-cmd => pid.z.command
 net zpos-fb hm2_5i20.0.encoder.02.position => axis.2.motor-pos-fb pid.z.feedback
 net zposlimit hm2_5i20.0.gpio.060.in => axis.2.pos-lim-sw-in
 # parameter values
-setp abs.0.tmax         2590
-setp abs.1.tmax         1380
-setp abs.2.tmax         4010
-setp abs.3.tmax          860
-setp classicladder.0.refresh.tmax        64870
+setp abs.0.tmax         5620
+setp abs.1.tmax         2160
+setp abs.2.tmax         2250
+setp abs.3.tmax          940
+setp and2.0.tmax         3510
+setp and2.1.tmax         1010
+setp classicladder.0.refresh.tmax        63080
 setp hm2_5i20.0.encoder.00.counter-mode        FALSE
 setp hm2_5i20.0.encoder.00.filter         TRUE
 setp hm2_5i20.0.encoder.00.index-invert        FALSE
@@ -298,29 +316,29 @@ setp hm2_5i20.0.gpio.063.is_output        FALSE
 setp hm2_5i20.0.gpio.064.invert_output         TRUE
 setp hm2_5i20.0.gpio.064.is_opendrain        FALSE
 setp hm2_5i20.0.gpio.064.is_output         TRUE
-setp hm2_5i20.0.gpio.065.invert_output        FALSE
-setp hm2_5i20.0.gpio.065.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.065.invert_output         TRUE
+setp hm2_5i20.0.gpio.065.is_opendrain         TRUE
 setp hm2_5i20.0.gpio.065.is_output         TRUE
 setp hm2_5i20.0.gpio.066.invert_output         TRUE
-setp hm2_5i20.0.gpio.066.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.066.is_opendrain         TRUE
 setp hm2_5i20.0.gpio.066.is_output         TRUE
-setp hm2_5i20.0.gpio.067.invert_output        FALSE
-setp hm2_5i20.0.gpio.067.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.067.invert_output         TRUE
+setp hm2_5i20.0.gpio.067.is_opendrain         TRUE
 setp hm2_5i20.0.gpio.067.is_output         TRUE
 setp hm2_5i20.0.gpio.068.invert_output         TRUE
-setp hm2_5i20.0.gpio.068.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.068.is_opendrain         TRUE
 setp hm2_5i20.0.gpio.068.is_output         TRUE
-setp hm2_5i20.0.gpio.069.invert_output        FALSE
-setp hm2_5i20.0.gpio.069.is_opendrain        FALSE
-setp hm2_5i20.0.gpio.069.is_output        FALSE
+setp hm2_5i20.0.gpio.069.invert_output         TRUE
+setp hm2_5i20.0.gpio.069.is_opendrain         TRUE
+setp hm2_5i20.0.gpio.069.is_output         TRUE
 setp hm2_5i20.0.gpio.070.invert_output         TRUE
-setp hm2_5i20.0.gpio.070.is_opendrain        FALSE
+setp hm2_5i20.0.gpio.070.is_opendrain         TRUE
 setp hm2_5i20.0.gpio.070.is_output         TRUE
-setp hm2_5i20.0.gpio.071.invert_output        FALSE
-setp hm2_5i20.0.gpio.071.is_opendrain        FALSE
-setp hm2_5i20.0.gpio.071.is_output        FALSE
+setp hm2_5i20.0.gpio.071.invert_output         TRUE
+setp hm2_5i20.0.gpio.071.is_opendrain         TRUE
+setp hm2_5i20.0.gpio.071.is_output         TRUE
 setp hm2_5i20.0.io_error        FALSE
-setp hm2_5i20.0.pet_watchdog.tmax         8900
+setp hm2_5i20.0.pet_watchdog.tmax         6880
 setp hm2_5i20.0.pwmgen.00.output-type            1
 setp hm2_5i20.0.pwmgen.00.scale           -5
 setp hm2_5i20.0.pwmgen.01.output-type            1
@@ -331,30 +349,39 @@ setp hm2_5i20.0.pwmgen.03.output-type            1
 setp hm2_5i20.0.pwmgen.03.scale         2500
 setp hm2_5i20.0.pwmgen.pdm_frequency   0x000186A0
 setp hm2_5i20.0.pwmgen.pwm_frequency   0x000186A0
-setp hm2_5i20.0.read.tmax        76380
+setp hm2_5i20.0.read.tmax        72650
 setp hm2_5i20.0.read_gpio.tmax            0
 setp hm2_5i20.0.watchdog.timeout_ns   0x00989680
-setp hm2_5i20.0.write.tmax        42770
+setp hm2_5i20.0.write.tmax        43350
 setp hm2_5i20.0.write_gpio.tmax            0
-setp motion-command-handler.tmax         6530
-setp motion-controller.tmax        54260
+setp motion-command-handler.tmax         5530
+setp motion-controller.tmax        54440
 setp motion.servo.overruns   0x00000000
-setp mult2.0.tmax         2550
+setp mult2.0.tmax         2630
 setp near.0.difference            0
 setp near.0.scale          0.9
-setp near.0.tmax         5210
-setp pid.0.do-pid-calcs.tmax         7990
-setp pid.1.do-pid-calcs.tmax         8130
-setp pid.2.do-pid-calcs.tmax         4750
-setp pid.3.do-pid-calcs.tmax         4400
-setp pid.4.do-pid-calcs.tmax        10450
-setp pid.5.do-pid-calcs.tmax         5620
-setp pid.6.do-pid-calcs.tmax        13140
-setp scale.0.tmax         1860
-setp scale.1.tmax         1460
-setp scale.2.tmax         1050
-setp scale.3.tmax         1370
-setp scale.spindle.tmax         5920
+setp near.0.tmax         1440
+setp or2.0.tmax         2370
+setp pid.0.do-pid-calcs.tmax         7920
+setp pid.1.do-pid-calcs.tmax         7170
+setp pid.2.do-pid-calcs.tmax         8350
+setp pid.3.do-pid-calcs.tmax         5700
+setp pid.4.do-pid-calcs.tmax         4720
+setp pid.5.do-pid-calcs.tmax         3620
+setp pid.6.do-pid-calcs.tmax         5500
+setp qdtoolchange.arm-move-timeout   0x0000000F
+setp qdtoolchange.carousel-home-timeout   0x0000002D
+setp qdtoolchange.carousel-move-timeout   0x00000003
+setp qdtoolchange.changer-capacity   0x00000018
+setp qdtoolchange.claw-open-timeout   0x00000001
+setp qdtoolchange.complete-max-time   0x000003E8
+setp qdtoolchange.debounce-period   0x00000028
+setp qdtoolchange.tmax         5490
+setp scale.0.tmax         1420
+setp scale.1.tmax         2980
+setp scale.2.tmax         1250
+setp scale.3.tmax         1440
+setp scale.spindle.tmax         4390
 # realtime thread/function links
 addf hm2_5i20.0.read servo-thread
 addf motion-command-handler servo-thread
@@ -380,3 +407,7 @@ addf scale.3 servo-thread
 addf near.0 servo-thread
 addf hm2_5i20.0.write servo-thread
 addf hm2_5i20.0.pet_watchdog servo-thread
+addf qdtoolchange servo-thread
+addf or2.0 servo-thread
+addf and2.0 servo-thread
+addf and2.1 servo-thread

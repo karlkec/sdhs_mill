@@ -204,10 +204,6 @@
 							</hbox>
 						</vbox>
 					</hbox>
-					<hbox>
-						<label><text>"Test:"</text></label>
-						<s32><width>8</width><halpin>"test-display"</halpin></s32>
-					</hbox>
 				</vbox>
 			</labelframe>
 		</vbox>

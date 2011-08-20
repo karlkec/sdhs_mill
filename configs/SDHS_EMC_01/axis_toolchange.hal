@@ -37,9 +37,9 @@ net machine-on <= halui.machine.is-on => qdtoolchange.machine-on
 
 # Hardware inputs from the tool changer hardware to the qdtoolchange component
 net qd-reset <= hm2_5i20.0.gpio.054.in_not => qdtoolchange.qd-complete
-# Claw open not working on hardware microswitch
-#net claw-open <= hm2_5i20.0.gpio.055.in_not => qdtoolchange.claw-open
-setp qdtoolchange.claw-open 1
+# Claw open is wired to the NO contact
+net claw-open <= hm2_5i20.0.gpio.055.in => qdtoolchange.claw-open
+net auto-mode <= hm2_5i20.0.gpio.063.in_not => qdtoolchange.qd-auto
 
 # Output commands from qdtoolchange component to tool changer hardware
 net tool-out-command <= qdtoolchange.tool-out-command => hm2_5i20.0.gpio.065.out

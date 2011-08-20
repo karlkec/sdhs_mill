@@ -47,8 +47,8 @@ save all hal_config.txt
 
 # Tool Changer
 # pyvcp hardware monitoring
-net tool-change-latched => pyvcp.request-led
-net tc-complete => pyvcp.complete-led
+net tool-change-auto => pyvcp.request-led
+net tool-changed-ored => pyvcp.complete-led
 net qd-reset => pyvcp.reset-led
 net auto-mode => pyvcp.auto-mode-led
 net claw-open => pyvcp.claw-open-led
@@ -63,7 +63,6 @@ net qdtoolchanger-state <= qdtoolchange.current-state => pyvcp.changer-state-dis
 net qdtoolchanger-cur-tool <= qdtoolchange.current-tool => pyvcp.cur-toolno-disp
 net qdtoolchanger-homed <= qdtoolchange.is-homed => pyvcp.homed-led
 net qdtoolchanger-ready <= qdtoolchange.ready => pyvcp.qd-ready-led
-net qdtoolchanger-test-out <= qdtoolchange.test-out => pyvcp.test-display
 
 
 # **** Setup of pyvcp buttons and MDI commands using HAL_UI and pyvcp - END ****
