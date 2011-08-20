@@ -14,6 +14,39 @@ loadrt hm2_pci config="firmware=hm2/5i20/SVST8_4IM2.BIT num_encoders=4 num_pwmge
     setp hm2_5i20.0.pwmgen.pdm_frequency 100000
     setp hm2_5i20.0.watchdog.timeout_ns 10000000
 
+# pins 65, through 71 are all active low open-drain outputs, and so will be inverted
+setp hm2_5i20.0.gpio.064.is_output true
+setp hm2_5i20.0.gpio.064.invert_output true
+setp hm2_5i20.0.gpio.064.is_opendrain true
+
+setp hm2_5i20.0.gpio.065.is_output true
+setp hm2_5i20.0.gpio.065.invert_output true
+setp hm2_5i20.0.gpio.065.is_opendrain true
+
+setp hm2_5i20.0.gpio.066.is_output true
+setp hm2_5i20.0.gpio.066.invert_output true
+setp hm2_5i20.0.gpio.066.is_opendrain true
+
+setp hm2_5i20.0.gpio.067.is_output true
+setp hm2_5i20.0.gpio.067.invert_output true
+setp hm2_5i20.0.gpio.067.is_opendrain true
+
+setp hm2_5i20.0.gpio.068.is_output true
+setp hm2_5i20.0.gpio.068.invert_output true
+setp hm2_5i20.0.gpio.068.is_opendrain true
+
+setp hm2_5i20.0.gpio.069.is_output true
+setp hm2_5i20.0.gpio.069.invert_output true
+setp hm2_5i20.0.gpio.069.is_opendrain true
+
+setp hm2_5i20.0.gpio.070.is_output true
+setp hm2_5i20.0.gpio.070.invert_output true
+setp hm2_5i20.0.gpio.070.is_opendrain true
+
+setp hm2_5i20.0.gpio.071.is_output true
+setp hm2_5i20.0.gpio.071.invert_output true
+setp hm2_5i20.0.gpio.071.is_opendrain true
+
 # Tool Changer
 loadrt qdtoolchange
 loadrt flipflop count=1
@@ -177,6 +210,7 @@ setp hm2_5i20.0.pwmgen.02.scale -10.0
 #  an enable checkbox, and a left-right slider that goes from -10 to +10. We convert these
 #  to the hardware output lines.
 
+<<<<<<< HEAD
 # pins 65, through 71 are all active low open-drain outputs, and so will be inverted
 setp hm2_5i20.0.gpio.064.is_output true
 setp hm2_5i20.0.gpio.064.invert_output true
@@ -210,6 +244,8 @@ setp hm2_5i20.0.gpio.071.is_output true
 setp hm2_5i20.0.gpio.071.invert_output true
 setp hm2_5i20.0.gpio.071.is_opendrain true
 
+=======
+>>>>>>> toolchange
 # Spindle drive uses an absolute value output
 net pwm3_val <= iotest.dac3-f => abs.0.in
 net abs_spindle <= abs.0.out => hm2_5i20.0.pwmgen.03.value
@@ -256,9 +292,8 @@ net qd-error <= qdtoolchange.error-flag => iotest.error-led
 
 # Hardware inputs from the tool changer to the qdtoolchange component
 net qd-reset <= hm2_5i20.0.gpio.054.in_not => qdtoolchange.qd-complete
-# Claw open not working on hardware microswitch
-#net claw-open <= hm2_5i20.0.gpio.055.in_not => qdtoolchange.claw-open
-setp qdtoolchange.claw-open 1
+# Claw open switch wired to NO contact, so we use in, instead of in_not
+net claw-open <= hm2_5i20.0.gpio.055.in => qdtoolchange.claw-open
 net auto-mode <= hm2_5i20.0.gpio.063.in_not => qdtoolchange.qd-auto
 
 # Output commands from qdtoolchange component to tool changer hardware
@@ -285,7 +320,6 @@ net qdtoolchanger-state <= qdtoolchange.current-state => iotest.changer-state-di
 net qdtoolchanger-cur-tool <= qdtoolchange.current-tool => iotest.cur-toolno-disp
 net qdtoolchanger-homed <= qdtoolchange.is-homed => iotest.homed-led
 net qdtoolchanger-ready <= qdtoolchange.ready => iotest.qd-ready-led
-net qdtoolchanger-test-out <= qdtoolchange.test-out => iotest.test-display
 
 #helps for debugging
 loadusr halmeter
