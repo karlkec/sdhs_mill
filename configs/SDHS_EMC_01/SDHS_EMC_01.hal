@@ -12,11 +12,27 @@ loadrt mult2 names=mult2.0
 loadrt near
 loadrt classicladder_rt numPhysInputs=15 numPhysOutputs=15 numS32in=10 numS32out=10 numFloatIn=10 numFloatOut=10
 
-# For friction compensation
-#loadrt frcomp count=3
-#addf frcomp.0 servo-thread
-#addf frcomp.1 servo-thread
-#addf frcomp.2 servo-thread
+# Set up hal output pins here (early) to avoid glitches on startup
+setp hm2_5i20.0.gpio.065.is_output true
+setp hm2_5i20.0.gpio.065.invert_output true
+setp hm2_5i20.0.gpio.065.is_opendrain true
+
+setp hm2_5i20.0.gpio.067.is_output true
+setp hm2_5i20.0.gpio.067.invert_output true
+setp hm2_5i20.0.gpio.067.is_opendrain true
+
+setp hm2_5i20.0.gpio.069.is_output true
+setp hm2_5i20.0.gpio.069.invert_output true
+setp hm2_5i20.0.gpio.069.is_opendrain true
+
+setp hm2_5i20.0.gpio.070.is_output true
+setp hm2_5i20.0.gpio.070.invert_output true
+setp hm2_5i20.0.gpio.070.is_opendrain true
+
+setp hm2_5i20.0.gpio.071.is_output true
+setp hm2_5i20.0.gpio.071.invert_output true
+setp hm2_5i20.0.gpio.071.is_opendrain true
+
 
 addf hm2_5i20.0.read servo-thread
 addf motion-command-handler servo-thread

@@ -9,27 +9,7 @@ loadrt and2 count=2
 addf and2.0 servo-thread
 addf and2.1 servo-thread
 
-# Set up the output pins
-setp hm2_5i20.0.gpio.065.is_output true
-setp hm2_5i20.0.gpio.065.invert_output true
-setp hm2_5i20.0.gpio.065.is_opendrain true
-
-setp hm2_5i20.0.gpio.067.is_output true
-setp hm2_5i20.0.gpio.067.invert_output true
-setp hm2_5i20.0.gpio.067.is_opendrain true
-
-setp hm2_5i20.0.gpio.069.is_output true
-setp hm2_5i20.0.gpio.069.invert_output true
-setp hm2_5i20.0.gpio.069.is_opendrain true
-
-setp hm2_5i20.0.gpio.070.is_output true
-setp hm2_5i20.0.gpio.070.invert_output true
-setp hm2_5i20.0.gpio.070.is_opendrain true
-
-setp hm2_5i20.0.gpio.071.is_output true
-setp hm2_5i20.0.gpio.071.invert_output true
-setp hm2_5i20.0.gpio.071.is_opendrain true
-
+# HAL output pin setup is done early (in SDHS_EMC_01.hal)
 # Override any preceding tool change configuration
 unlinkp iocontrol.0.tool-change
 unlinkp iocontrol.0.tool-changed
