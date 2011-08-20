@@ -10,6 +10,9 @@ addf and2.0 servo-thread
 addf and2.1 servo-thread
 
 # HAL output pin setup is done early (in SDHS_EMC_01.hal)
+# Tool prepare loopback for iocontrol
+net tool-prepare-loopback   iocontrol.0.tool-prepare      =>  iocontrol.0.tool-prepared
+
 # Override any preceding tool change configuration
 unlinkp iocontrol.0.tool-change
 unlinkp iocontrol.0.tool-changed
