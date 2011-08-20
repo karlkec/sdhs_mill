@@ -1,4 +1,5 @@
-loadrt trivkins loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES
+loadrt trivkins 
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES
 loadrt probe_parport
 loadrt hostmot2
 loadrt hm2_pci config="firmware=hm2/5i20/SVST8_4IM2.BIT num_encoders=4 num_pwmgens=4 num_stepgens=0" 
